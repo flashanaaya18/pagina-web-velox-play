@@ -3,6 +3,12 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
+  <!-- ============================================================
+       ============================================================
+       VERSIÓN 1: NETLIFY (PÁGINA ORIGINAL)
+       ============================================================
+       ============================================================ -->
+  
   <!-- Página Principal / Landing Page Oficial Cinemax Plus (Velox Play) -->
   <url>
     <loc>https://pelixplushdz.netlify.app/</loc>
@@ -46,6 +52,12 @@
       <image:title>Velox Play Fútbol Directo y Deportes en Vivo</image:title>
       <image:caption>Transmisiones deportivas en directo HD y 4K en la aplicación</image:caption>
     </image:image>
+
+    <image:image>
+      <image:loc>https://pelixplushdz.netlify.app/velox_vip_store.png</image:loc>
+      <image:title>Velox Play Tienda VIP y Planes Gold</image:title>
+      <image:caption>Planes de suscripción VIP Gold para contenido premium sin publicidad</image:caption>
+    </image:image>
   </url>
 
   <!-- Sección de Descargas Directas APK por Arquitectura -->
@@ -53,7 +65,13 @@
     <loc>https://pelixplushdz.netlify.app/#descargas</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
+    
+    <image:image>
+      <image:loc>https://pelixplushdz.netlify.app/icon.png</image:loc>
+      <image:title>Descargar Velox Play APK Gratis</image:title>
+      <image:caption>Descarga directa de la APK de Velox Play v7.3.2 para ARM64, ARM32 y X86</image:caption>
+    </image:image>
   </url>
 
   <!-- Sección Comparativa Gratis vs VIP Gold -->
@@ -61,7 +79,7 @@
     <loc>https://pelixplushdz.netlify.app/#comparativa</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.90</priority>
   </url>
 
   <!-- Sección Tienda VIP y Planes -->
@@ -69,7 +87,35 @@
     <loc>https://pelixplushdz.netlify.app/#tienda</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.88</priority>
+    
+    <image:image>
+      <image:loc>https://pelixplushdz.netlify.app/velox_vip_store.png</image:loc>
+      <image:title>Planes VIP Gold de Velox Play</image:title>
+      <image:caption>Planes de suscripción de 1, 2, 3, 6 meses y 1 año para Velox Play</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Sección Compatibilidad -->
+  <url>
+    <loc>https://pelixplushdz.netlify.app/#compatibilidad</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    
+    <image:image>
+      <image:loc>https://pelixplushdz.netlify.app/app_preview.png</image:loc>
+      <image:title>Velox Play en Smart TV Android</image:title>
+      <image:caption>Velox Play funcionando en Smart TV Android con control remoto D-Pad</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Sección Seguridad -->
+  <url>
+    <loc>https://pelixplushdz.netlify.app/#seguridad</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
 
   <!-- Sección Preguntas Frecuentes FAQ -->
@@ -77,7 +123,179 @@
     <loc>https://pelixplushdz.netlify.app/#faq</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- APK ARM64 -->
+  <url>
+    <loc>https://pelixplushdz.netlify.app/cinemax_plus_arm64.apk</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  
+  <!-- APK ARM32 -->
+  <url>
+    <loc>https://pelixplushdz.netlify.app/cinemax_plus_arm32.apk</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  
+  <!-- APK X86 -->
+  <url>
+    <loc>https://pelixplushdz.netlify.app/cinemax_plus_x86.apk</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+
+  <!-- ============================================================
+       ============================================================
+       VERSIÓN 2: GITHUB PAGES (NUEVA VERSIÓN)
+       ============================================================
+       ============================================================ -->
+  
+  <!-- Página Principal / Landing Page Oficial Velox Play -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Imágenes Indexables para SEO de Google Images -->
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/icon.png</image:loc>
+      <image:title>Velox Play Icono Oficial v7.3.2</image:title>
+      <image:caption>Logotipo oficial de Velox Play (Cinemax Plus) para Android y Smart TV</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/velox_evolution_banner.png</image:loc>
+      <image:title>Velox Play Banner 4K - Cine Virtual y TV en Vivo</image:title>
+      <image:caption>Banner oficial de Velox Play v7.3.2 con tecnología de streaming ultraligera</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/app_preview.png</image:loc>
+      <image:title>Velox Play Interfaz Smart TV</image:title>
+      <image:caption>Interfaz optimizada para Smart TV Android con navegación por control remoto D-Pad</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/velox_movies_phone.png</image:loc>
+      <image:title>Velox Play Catálogo de Películas en Móvil</image:title>
+      <image:caption>Vista del catálogo de películas de estreno en 4K desde la app móvil de Velox Play</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/velox_series_phone.png</image:loc>
+      <image:title>Velox Play Módulo JKAnime y Series</image:title>
+      <image:caption>Librería completa de series y anime en español latino dentro de Velox Play</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/velox_sports_phone.png</image:loc>
+      <image:title>Velox Play Fútbol y Deportes en Vivo</image:title>
+      <image:caption>Transmisiones deportivas en directo HD y 4K desde la app Velox Play</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/velox_vip_store.png</image:loc>
+      <image:title>Velox Play Tienda VIP y Planes Gold</image:title>
+      <image:caption>Planes de suscripción VIP Gold con acceso a contenido premium sin publicidad</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Sección de Descargas Directas APK por Arquitectura -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/#descargas</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/icon.png</image:loc>
+      <image:title>Descargar Velox Play APK Gratis v7.3.2</image:title>
+      <image:caption>Descarga directa de la APK de Velox Play para ARM64, ARM32 y X86</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Sección Comparativa Gratis vs VIP Gold -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/#comparativa</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Sección Tienda VIP y Planes -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/#tienda</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+    
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/velox_vip_store.png</image:loc>
+      <image:title>Planes VIP Gold de Velox Play</image:title>
+      <image:caption>Planes de suscripción de 1, 2, 3, 6 meses y 1 año para Velox Play</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Sección Compatibilidad -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/#compatibilidad</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/app_preview.png</image:loc>
+      <image:title>Velox Play en Smart TV Android</image:title>
+      <image:caption>Velox Play funcionando en Smart TV Android con control remoto D-Pad</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Sección Seguridad -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/#seguridad</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Sección Preguntas Frecuentes FAQ -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/#faq</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- APK ARM64 -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/cinemax_plus_arm64.apk</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  
+  <!-- APK ARM32 -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/cinemax_plus_arm32.apk</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  
+  <!-- APK X86 -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/cinemax_plus_x86.apk</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
   </url>
 
 </urlset>
