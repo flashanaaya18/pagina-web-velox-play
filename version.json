@@ -1,0 +1,32 @@
+{
+  "app_name": "Cinemax Plus (Velox Play)",
+  "version": "7.3.2",
+  "version_code": 732,
+  "build_number": "16",
+  "release_date": "2026-07-23",
+  "status": "stable",
+  "min_android_version": "5.0 (Lollipop)",
+  "recommended_android_version": "7.0+ (Nougat / Smart TV)",
+  "changelog": [
+    "Motor híbrido de reproducción con MediaKit, Chewie y BetterPlayer 4K",
+    "Nueva sala de Cine Virtual con sincronización en vivo y chat integrado",
+    "Módulo JKAnime renovado con servidores de alta velocidad",
+    "Optimización D-Pad y TVFocusable para Smart TV y FireStick",
+    "Integración de canales de TV y Fútbol en vivo HLS ultraligeros",
+    "Control Parental con PIN de seguridad personalizable"
+  ],
+  "download_urls": {
+    "arm64": "cinemax_plus_arm64.apk",
+    "arm32": "cinemax_plus_arm32.apk",
+    "x86": "cinemax_plus_x86.apk"
+  },
+  "file_sizes": {
+    "arm64": "69.8 MB",
+    "arm32": "65.8 MB",
+    "x86": "75.6 MB"
+  },
+  "vip_support": {
+    "whatsapp": "+525616840524",
+    "status": "active"
+  }
+}
