@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velox Play 🎃 | Películas, Series, Anime, Doramas y Fútbol en Vivo</title>
+  <meta name="description" content="Descarga Velox Play Edición Especial Halloween. Disfruta de películas, series completas, animes, doramas y fútbol en vivo. Disponible en versión Gratis con anuncios y VIP Cero Anuncios.">
+  <meta name="keywords" content="Velox Play, streaming, peliculas, series, anime, doramas, futbol en vivo, halloween, apk tv, apk movil, vip cero anuncios">
+  <meta name="theme-color" content="#ff7518">
+
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:title" content="Velox Play 🎃 - Streaming de Películas, Anime, Doramas y Fútbol">
+  <meta property="og:description" content="Disfruta de la mejor app de streaming para Móvil y Smart TV. ¡Edición Especial Halloween!">
+  <meta property="og:image" content="assets/hero_halloween.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo_halloween.png">
+
+  <!-- Google Fonts: Creepster (Terror/Halloween) & Outfit (Modern UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Animate.css para Micro-Animaciones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- Estilos Personalizados Halloween -->
+  <link rel="stylesheet" href="css/halloween.css">
+</head>
+<body>
+
+  <!-- Telarañas Decorativas en las Esquinas -->
+  <svg class="corner-web-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 L100,0 M0,0 L0,100 M0,0 L85,85 M0,0 L95,45 M0,0 L45,95" stroke="#9d4edd" stroke-width="1.2" stroke-opacity="0.8"/>
+    <path d="M25,0 C25,12 12,25 0,25" stroke="#ff7518" stroke-width="1" fill="none"/>
+    <path d="M50,0 C50,26 26,50 0,50" stroke="#ff7518" stroke-width="1" fill="none"/>
+    <path d="M75,0 C75,40 40,75 0,75" stroke="#ff7518" stroke-width="1" fill="none"/>
+    <path d="M100,0 C100,55 55,100 0,100" stroke="#9d4edd" stroke-width="1.2" fill="none"/>
+  </svg>
+
+  <svg class="corner-web-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 L100,0 M0,0 L0,100 M0,0 L85,85 M0,0 L95,45 M0,0 L45,95" stroke="#ff7518" stroke-width="1.2" stroke-opacity="0.8"/>
+    <path d="M25,0 C25,12 12,25 0,25" stroke="#9d4edd" stroke-width="1" fill="none"/>
+    <path d="M50,0 C50,26 26,50 0,50" stroke="#9d4edd" stroke-width="1" fill="none"/>
+    <path d="M75,0 C75,40 40,75 0,75" stroke="#9d4edd" stroke-width="1" fill="none"/>
+    <path d="M100,0 C100,55 55,100 0,100" stroke="#ff7518" stroke-width="1.2" fill="none"/>
+  </svg>
+
+  <!-- Canvas de Brasas y Partículas Místicas -->
+  <canvas id="halloween-canvas"></canvas>
+
+  <!-- Murciélagos Volando Animados -->
+  <div class="bats-container" aria-hidden="true">
+    <div class="bat">
+      <svg viewBox="0 0 64 32">
+        <path d="M32,16 C30,10 24,0 12,2 C0,4 2,18 10,22 C14,24 22,20 28,26 C30,28 34,28 36,26 C42,20 50,24 54,22 C62,18 64,4 52,2 C40,0 34,10 32,16 Z"/>
+      </svg>
+    </div>
+    <div class="bat">
+      <svg viewBox="0 0 64 32">
+        <path d="M32,16 C30,10 24,0 12,2 C0,4 2,18 10,22 C14,24 22,20 28,26 C30,28 34,28 36,26 C42,20 50,24 54,22 C62,18 64,4 52,2 C40,0 34,10 32,16 Z"/>
+      </svg>
+    </div>
+    <div class="bat">
+      <svg viewBox="0 0 64 32">
+        <path d="M32,16 C30,10 24,0 12,2 C0,4 2,18 10,22 C14,24 22,20 28,26 C30,28 34,28 36,26 C42,20 50,24 54,22 C62,18 64,4 52,2 C40,0 34,10 32,16 Z"/>
+      </svg>
+    </div>
+    <div class="bat">
+      <svg viewBox="0 0 64 32">
+        <path d="M32,16 C30,10 24,0 12,2 C0,4 2,18 10,22 C14,24 22,20 28,26 C30,28 34,28 36,26 C42,20 50,24 54,22 C62,18 64,4 52,2 C40,0 34,10 32,16 Z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Mascotita Fantasma Flotante (Sticker Interactivo) -->
+  <div class="ghost-mascot-sticker" onclick="openVipWhatsApp('Sticker Fantasma')" title="¡Disfruta sin anuncios con VIP!">
+    <div class="ghost-bubble">¡Pase VIP Cero Anuncios! 🎃</div>
+    <img src="assets/ghost_streaming.png" alt="Fantasma Velox Play" class="ghost-img">
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-halloween fixed-top">
+    <div class="container">
+      <a class="navbar-brand-custom" href="#inicio">
+        <img src="assets/logo_halloween.png" alt="Velox Play Logo" class="brand-logo-img">
+        <div>
+          <span class="brand-text-main">VELOX PLAY</span>
+          <span class="brand-text-sub">Edición Halloween 🎃</span>
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-1">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#inicio"><i class="bi bi-house-door"></i> Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#catalogo"><i class="bi bi-collection-play"></i> Catálogo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#planes"><i class="bi bi-gem"></i> Planes (VIP / Gratis)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#descargas"><i class="bi bi-cloud-arrow-down"></i> Descargar APKs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#instalacion"><i class="bi bi-info-circle"></i> Guía TV / Móvil</a>
+          </li>
+          <!-- Botón de Audio Sintetizado -->
+          <li class="nav-item ms-lg-2 my-2 my-lg-0">
+            <button id="sound-toggle-btn" class="btn-sound-toggle" title="Activar/Desactivar Sonido">
+              <i class="bi bi-volume-mute"></i> <span>Sonido: OFF</span>
+            </button>
+          </li>
+          <!-- Botón VIP Rápido en Navbar -->
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-nav-vip" onclick="openVipWhatsApp('Navbar')">
+              <i class="bi bi-whatsapp"></i> Adquirir VIP 🎃
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header id="inicio" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 text-center text-lg-start">
+          <div class="hero-badge animate__animated animate__fadeInDown">
+            <i class="bi bi-fire"></i> ¡Especial de Terror & Entretenimiento! 🎃
+          </div>
+
+          <h1 class="neon-title mb-3">
+            VELOX PLAY
+          </h1>
+
+          <p class="hero-subtitle">
+            Tu centro de streaming definitivo: <strong class="glow-orange">Películas de taquilla y terror</strong>, 
+            <strong class="glow-purple">Series completas</strong>, <strong class="glow-orange">Animes en estreno</strong>, 
+            <strong class="glow-purple">Doramas populares</strong> y <strong class="glow-green">Fútbol en Vivo</strong> sin cortes.
+            Disfruta en tu celular, tablet o Smart TV.
+          </p>
+
+          <!-- Botones de Acción Inmediata -->
+          <div class="hero-cta-group justify-content-center justify-content-lg-start">
+            <a href="apks/velox_play_movil.apk" class="btn-hero-download" download="velox_play_movil.apk">
+              <i class="bi bi-phone"></i> APK Móvil (Android)
+            </a>
+            <a href="apks/velox_play_tv.apk" class="btn-hero-tv" download="velox_play_tv.apk">
+              <i class="bi bi-tv"></i> APK Smart TV
+            </a>
+            <button class="btn-hero-vip" onclick="openVipWhatsApp('Hero VIP')">
+              <i class="bi bi-shield-fill-check"></i> Pase VIP (Cero Anuncios)
+            </button>
+          </div>
+
+          <!-- Mini Badges de Beneficios -->
+          <div class="hero-badges-strip justify-content-center justify-content-lg-start">
+            <span class="feature-mini-pill"><i class="bi bi-check2-circle glow-orange"></i> 100% Compatible Android</span>
+            <span class="feature-mini-pill"><i class="bi bi-lightning-charge-fill glow-orange"></i> Servidores Rápidos</span>
+            <span class="feature-mini-pill"><i class="bi bi-badge-hd-fill glow-purple"></i> Full HD & 4K</span>
+            <span class="feature-mini-pill"><i class="bi bi-slash-circle-fill glow-green"></i> Opción Sin Publicidad</span>
+          </div>
+        </div>
+
+        <!-- Showcase Visual con TV y Smartphone en Ambiente Halloween -->
+        <div class="col-lg-6">
+          <div class="hero-device-wrapper">
+            <img src="assets/hero_halloween.jpg" alt="Velox Play en Smart TV y Móvil" class="hero-showcase-img">
+            
+            <!-- Badges Flotantes de Alto Impacto -->
+            <div class="floating-showcase-badge badge-top-right">
+              <i class="bi bi-trophy-fill glow-green"></i> ⚽ Fútbol En Vivo HD
+            </div>
+            <div class="floating-showcase-badge badge-bottom-left">
+              <i class="bi bi-stars glow-purple"></i> 🚫 VIP Cero Publicidad
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BANNER DESTACADO DE TEMPORADA HALLOWEEN -->
+  <section class="container my-5">
+    <div class="halloween-feature-banner">
+      <img src="assets/halloween_special.jpg" alt="Especial Noche de Brujas" class="banner-bg-img">
+      <div class="banner-overlay-content">
+        <div>
+          <span class="badge bg-danger text-white px-3 py-2 rounded-pill mb-2">🔥 FESTIVAL DE TERROR 2026</span>
+          <h2 class="font-spooky fs-1 text-white mb-2">MARATÓN NOCHE DE BRUJAS</h2>
+          <p class="text-white-50 mb-0 max-w-500">
+            Descubre los mejores estrenos de cine de suspenso, series de miedo, clásicos espeluznantes y animes oscuros en Velox Play.
+          </p>
+        </div>
+        <div>
+          <a href="#catalogo" class="btn btn-hero-download">
+            <i class="bi bi-play-circle-fill"></i> Explorar Títulos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN CATÁLOGO Y CONTENIDO -->
+  <section id="catalogo" class="content-section">
+    <div class="container">
+      <div class="section-spooky-header">
+        <span class="section-badge"><i class="bi bi-film"></i> Todo el Contenido en un Solo Lugar</span>
+        <h2 class="section-title">¿Qué quieres ver hoy?</h2>
+        <p class="section-subtitle">
+          Elige entre miles de horas de cine, series adictivas, los mejores animes de temporada, doramas que te atraparán y la pasión del fútbol en directo.
+        </p>
+      </div>
+
+      <!-- Filtros por Categoría -->
+      <div class="halloween-tabs-nav">
+        <button class="halloween-tab-btn active" data-filter="all">
+          <i class="bi bi-grid-fill"></i> Todos
+        </button>
+        <button class="halloween-tab-btn" data-filter="halloween">
+          <i class="bi bi-moon-stars-fill"></i> Especial Halloween 🎃
+        </button>
+        <button class="halloween-tab-btn" data-filter="peliculas">
+          <i class="bi bi-camera-reels-fill"></i> Películas
+        </button>
+        <button class="halloween-tab-btn" data-filter="series">
+          <i class="bi bi-tv-fill"></i> Series
+        </button>
+        <button class="halloween-tab-btn" data-filter="anime">
+          <i class="bi bi-lightning-fill"></i> Animes
+        </button>
+        <button class="halloween-tab-btn" data-filter="doramas">
+          <i class="bi bi-heart-fill"></i> Doramas
+        </button>
+        <button class="halloween-tab-btn" data-filter="futbol">
+          <i class="bi bi-trophy-fill"></i> Fútbol en Vivo ⚽
+        </button>
+      </div>
+
+      <!-- Tarjetas de Contenido Interactivas -->
+      <div class="row g-4" id="contentCardsGrid">
+
+        <!-- 1. Especial Halloween: The Haunting of Hill House -->
+        <div class="col-md-6 col-lg-4 content-card-col" data-category="halloween series">
+          <div class="content-card">
+            <div class="content-card-poster">
+              <img src="assets/hero_halloween.jpg" alt="Terror en Hill House">
+              <span class="card-badge-category">Terror / Serie</span>
+              <span class="card-badge-quality">4K HDR</span>
+              <div class="card-play-overlay">
+                <div class="play-circle-btn"><i class="bi bi-play-fill"></i></div>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <h3 class="card-title-custom">The Haunting of Hill House</h3>
+              <div class="card-info-meta">
+                <span><i class="bi bi-star-fill text-warning"></i> 8.6/10</span>
+                <span><i class="bi bi-clock"></i> Temporada Completa</span>
+                <span><i class="bi bi-shield-check text-success"></i> Audio Latino</span>
+              </div>
+              <p class="card-desc-custom">
+                Un drama psicológico y de terror que sigue a unos hermanos que crecieron en lo que se convertiría en la casa embrujada más famosa del país.
+              </p>
+              <button class="btn-card-action btn-preview-trigger" 
+                      data-title="The Haunting of Hill House"
+                      data-category="Especial Halloween / Series"
+                      data-quality="4K Ultra HD"
+                      data-desc="Una obra maestra del terror contemporáneo disponible con todos sus episodios en audio latino y subtitulado sin cortes."
+                      data-img="assets/hero_halloween.jpg">
+                <i class="bi bi-info-circle"></i> Ver Detalles en App
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Fútbol en Vivo: Champions League & Clásicos -->
+        <div class="col-md-6 col-lg-4 content-card-col" data-category="futbol deportes">
+          <div class="content-card">
+            <div class="content-card-poster">
+              <img src="assets/soccer_banner.jpg" alt="Fútbol En Vivo">
+              <span class="card-badge-category" style="color: #39ff14; border-color: #39ff14;">EN VIVO ⚽</span>
+              <span class="card-badge-quality" style="background: #25d366;">60 FPS HD</span>
+              <div class="card-play-overlay">
+                <div class="play-circle-btn" style="background: #25d366;"><i class="bi bi-broadcast"></i></div>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <h3 class="card-title-custom">Fútbol Total & Ligas Mundiales</h3>
+              <div class="card-info-meta">
+                <span class="text-danger fw-bold"><i class="bi bi-record-circle"></i> TRANSMISIÓN EN DIRECTO</span>
+                <span><i class="bi bi-soundwave"></i> Relato Español</span>
+              </div>
+              <p class="card-desc-custom">
+                Partidos en vivo de Champions League, Liga MX, Premier League, LaLiga, Copa Libertadores y torneos internacionales con múltiples señales estables.
+              </p>
+              <button class="btn-card-action btn-preview-trigger"
+                      data-title="Señales Deportivas en Directo"
+                      data-category="Fútbol y Deportes en Vivo"
+                      data-quality="1080p 60 FPS"
+                      data-desc="Canales deportivos exclusivos 24/7 sin caídas para ver todos los partidos de tu equipo favorito en pantalla gigante o celular."
+                      data-img="assets/soccer_banner.jpg">
+                <i class="bi bi-broadcast-pin"></i> Ver Canales en App
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Anime Especial: Demon Slayer & Jujutsu Kaisen -->
+        <div class="col-md-6 col-lg-4 content-card-col" data-category="anime">
+          <div class="content-card">
+            <div class="content-card-poster">
+              <img src="assets/anime_dorama.jpg" alt="Anime Demon Slayer">
+              <span class="card-badge-category">Anime / Estreno</span>
+              <span class="card-badge-quality">Full HD</span>
+              <div class="card-play-overlay">
+                <div class="play-circle-btn"><i class="bi bi-play-fill"></i></div>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <h3 class="card-title-custom">Kimetsu no Yaiba & Shonen Hits</h3>
+              <div class="card-info-meta">
+                <span><i class="bi bi-star-fill text-warning"></i> 9.2/10</span>
+                <span><i class="bi bi-badge-cc"></i> Sub y Doblaje</span>
+              </div>
+              <p class="card-desc-custom">
+                Las batallas más épicas del anime: Kimetsu no Yaiba, Jujutsu Kaisen, Chainsaw Man, Dan Da Dan, One Piece y estrenos semanales en simultáneo.
+              </p>
+              <button class="btn-card-action btn-preview-trigger"
+                      data-title="Anime Zone: Demon Slayer & Hits"
+                      data-category="Anime en Emisión y Finalizados"
+                      data-quality="Full HD 1080p"
+                      data-desc="Capítulos estrenados al día, catálogo completo de películas de anime, audio original en japonés subtitulado y doblajes latinos oficiales."
+                      data-img="assets/anime_dorama.jpg">
+                <i class="bi bi-info-circle"></i> Ver Detalles en App
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Doramas: Sweet Home & Estamos Muertos -->
+        <div class="col-md-6 col-lg-4 content-card-col" data-category="doramas series halloween">
+          <div class="content-card">
+            <div class="content-card-poster">
+              <img src="assets/anime_dorama.jpg" alt="Dorama Sweet Home">
+              <span class="card-badge-category">Dorama Coreano</span>
+              <span class="card-badge-quality">4K Ultra</span>
+              <div class="card-play-overlay">
+                <div class="play-circle-btn"><i class="bi bi-play-fill"></i></div>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <h3 class="card-title-custom">Sweet Home (Dulce Hogar) & K-Dramas</h3>
+              <div class="card-info-meta">
+                <span><i class="bi bi-star-fill text-warning"></i> 8.8/10</span>
+                <span><i class="bi bi-translate"></i> Doblaje Latino</span>
+              </div>
+              <p class="card-desc-custom">
+                Mientras humanos se transforman en feroces monstruos, un grupo de supervivientes lucha por resistir en un edificio sellado. Emoción y terror coreano al límite.
+              </p>
+              <button class="btn-card-action btn-preview-trigger"
+                      data-title="Sweet Home & K-Dramas Exclusivos"
+                      data-category="Doramas / K-Drama"
+                      data-quality="4K Ultra HD"
+                      data-desc="Los mejores doramas de amor, fantasía, apocalipsis zombie y comedia romántica con subtítulos profesionales y doblaje."
+                      data-img="assets/anime_dorama.jpg">
+                <i class="bi bi-info-circle"></i> Ver Detalles en App
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Películas de Taquilla & Estrenos -->
+        <div class="col-md-6 col-lg-4 content-card-col" data-category="peliculas">
+          <div class="content-card">
+            <div class="content-card-poster">
+              <img src="assets/hero_bg.jpg" alt="Películas de Taquilla">
+              <span class="card-badge-category">Estrenos Taquilla</span>
+              <span class="card-badge-quality">4K Dolby</span>
+              <div class="card-play-overlay">
+                <div class="play-circle-btn"><i class="bi bi-play-fill"></i></div>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <h3 class="card-title-custom">Cine Mundial y Acción Extrema</h3>
+              <div class="card-info-meta">
+                <span><i class="bi bi-star-fill text-warning"></i> 8.9/10</span>
+                <span><i class="bi bi-film"></i> 2026 Premieres</span>
+              </div>
+              <p class="card-desc-custom">
+                Películas recién salidas del cine: superhéroes, comedias, acción sin límites, ciencia ficción y los mayores éxitos mundiales disponibles en cualquier momento.
+              </p>
+              <button class="btn-card-action btn-preview-trigger"
+                      data-title="Películas de Taquilla 2026"
+                      data-category="Cine y Estrenos"
+                      data-quality="4K Ultra HD + Dolby Atmos"
+                      data-desc="Disfruta del catálogo de cine más amplio en tu idioma y con la mejor resolución disponible."
+                      data-img="assets/hero_bg.jpg">
+                <i class="bi bi-info-circle"></i> Ver Detalles en App
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Retro & Entretenimiento Familiar -->
+        <div class="col-md-6 col-lg-4 content-card-col" data-category="series peliculas">
+          <div class="content-card">
+            <div class="content-card-poster">
+              <img src="assets/retro_games.jpg" alt="Clásicos y Entretenimiento">
+              <span class="card-badge-category">Clásicos / Familia</span>
+              <span class="card-badge-quality">HD Remaster</span>
+              <div class="card-play-overlay">
+                <div class="play-circle-btn"><i class="bi bi-play-fill"></i></div>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <h3 class="card-title-custom">Colección Clásicos & Nostalgia</h3>
+              <div class="card-info-meta">
+                <span><i class="bi bi-heart-pulse-fill text-danger"></i> Favoritos</span>
+                <span><i class="bi bi-check-all text-info"></i> Todos los Tiempos</span>
+              </div>
+              <p class="card-desc-custom">
+                Revive las películas de culto de los 80s, 90s y 2000s, series legendarias, animación retro y contenido familiar para disfrutar con toda la familia.
+              </p>
+              <button class="btn-card-action btn-preview-trigger"
+                      data-title="Colección Retro & Clásicos"
+                      data-category="Clásicos y Familia"
+                      data-quality="HD Remasterizado"
+                      data-desc="Títulos que marcaron generaciones listos para ver con excelente sonido y video remasterizado."
+                      data-img="assets/retro_games.jpg">
+                <i class="bi bi-info-circle"></i> Ver Detalles en App
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PLANES (GRATIS vs VIP) -->
+  <section id="planes" class="pricing-section">
+    <div class="container">
+      <div class="section-spooky-header">
+        <span class="section-badge"><i class="bi bi-stars"></i> Acceso a Tu Medida</span>
+        <h2 class="section-title">Elige Cómo Quieres Disfrutar</h2>
+        <p class="section-subtitle">
+          Puedes usar Velox Play completamente gratis con anuncios o dar el salto a VIP para vivir la experiencia definitiva con Cero Publicidad.
+        </p>
+      </div>
+
+      <div class="row g-4 align-items-stretch justify-content-center">
+        <!-- PLAN GRATIS CON ANUNCIOS -->
+        <div class="col-lg-5 col-md-6">
+          <div class="pricing-card-free">
+            <div class="plan-header">
+              <h3 class="plan-title"><i class="bi bi-play-circle text-white-50"></i> Plan Gratis</h3>
+              <p class="plan-tagline">Disfruta sin pagar nada, financiado con anuncios</p>
+              <div class="plan-price-box">
+                <span class="plan-price-free">$0</span>
+                <span class="plan-period">/ para siempre</span>
+              </div>
+            </div>
+
+            <ul class="plan-features-list">
+              <li class="plan-feature-item">
+                <i class="bi bi-check-circle-fill"></i> Acceso al catálogo de películas y series
+              </li>
+              <li class="plan-feature-item">
+                <i class="bi bi-check-circle-fill"></i> Animes y Doramas disponibles
+              </li>
+              <li class="plan-feature-item">
+                <i class="bi bi-check-circle-fill"></i> Calidad estándar HD (720p / 1080p)
+              </li>
+              <li class="plan-feature-item">
+                <i class="bi bi-check-circle-fill"></i> Compatible con Móvil y Smart TV
+              </li>
+              <li class="plan-feature-item text-warning">
+                <i class="bi bi-exclamation-triangle-fill text-warning"></i> <strong>Con anuncios durante la reproducción</strong>
+              </li>
+              <li class="plan-feature-item text-white-50">
+                <i class="bi bi-x-circle"></i> Servidores estándar en horas pico
+              </li>
+            </ul>
+
+            <a href="#descargas" class="btn btn-outline-light w-100 py-3 rounded-4 fw-bold">
+              <i class="bi bi-download"></i> Descargar Versión Gratis
+            </a>
+          </div>
+        </div>
+
+        <!-- PLAN VIP CERO ANUNCIOS -->
+        <div class="col-lg-5 col-md-6">
+          <div class="pricing-card-vip">
+            <div class="vip-ribbon">⭐ CERO ANUNCIOS</div>
+
+            <div class="plan-header">
+              <h3 class="plan-title"><i class="bi bi-gem glow-orange"></i> Plan VIP Velox</h3>
+              <p class="plan-tagline">La experiencia más rápida, fluida y sin interrupciones</p>
+              <div class="plan-price-box">
+                <span class="plan-price-vip">VIP</span>
+                <span class="plan-period">/ Acceso Ilimitado</span>
+              </div>
+            </div>
+
+            <ul class="plan-features-list">
+              <li class="plan-feature-item highlight-vip">
+                <i class="bi bi-shield-check glow-green"></i> <strong>🚫 CERO ANUNCIOS (100% Sin Publicidad)</strong>
+              </li>
+              <li class="plan-feature-item highlight-vip">
+                <i class="bi bi-lightning-charge-fill glow-orange"></i> <strong>Servidores Ultra Rápidos VIP (Cero Cortes)</strong>
+              </li>
+              <li class="plan-feature-item">
+                <i class="bi bi-check-circle-fill"></i> Máxima Calidad 4K Ultra HD & Dolby Atmos
+              </li>
+              <li class="plan-feature-item">
+                <i class="bi bi-check-circle-fill"></i> Fútbol en Vivo en Canales Exclusivos HD
+              </li>
+              <li class="plan-feature-item">
+                <i class="bi bi-check-circle-fill"></i> Uso en Smart TV, Móvil, Tablet y TV Box
+              </li>
+              <li class="plan-feature-item">
+                <i class="bi bi-check-circle-fill"></i> Soporte VIP Directo 24/7
+              </li>
+            </ul>
+
+            <!-- BOTÓN DE COMPRA VÍA WHATSAPP SIN EXPOSICIÓN DEL NÚMERO -->
+            <button class="btn-buy-vip-whatsapp" onclick="openVipWhatsApp('Tarjeta VIP')">
+              <i class="bi bi-whatsapp"></i> Comprar Acceso VIP en WhatsApp
+            </button>
+
+            <div class="vip-security-note">
+              <i class="bi bi-lock-fill text-success"></i> Activación inmediata • Chat oficial de soporte seguro
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DESCARGAS (APKS) -->
+  <section id="descargas" class="download-section">
+    <div class="container">
+      <div class="section-spooky-header">
+        <span class="section-badge"><i class="bi bi-download"></i> Instalación Directa</span>
+        <h2 class="section-title">Descarga Velox Play</h2>
+        <p class="section-subtitle">
+          Archivos APK oficiales listos para instalar. Seguros, optimizados y con la última actualización de Halloween.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- APK MÓVIL (Android Celular y Tablet) -->
+        <div class="col-lg-5 col-md-6">
+          <div class="apk-card">
+            <div class="apk-card-top">
+              <div class="apk-icon-box mobile-icon">
+                <i class="bi bi-phone"></i>
+              </div>
+              <div class="apk-title-info">
+                <h3>Velox Play Móvil</h3>
+                <span class="apk-meta-badge"><i class="bi bi-android2 text-success"></i> Móvil & Tablet</span>
+              </div>
+            </div>
+
+            <p class="text-white-50 mb-3">
+              Versión adaptada con interfaz táctil fluida, controles gestuales de brillo y volumen, y modo picture-in-picture.
+            </p>
+
+            <div class="apk-details-grid">
+              <div class="apk-detail-item">
+                <span class="apk-detail-label">Versión</span>
+                <span class="apk-detail-val">v2.4 Halloween</span>
+              </div>
+              <div class="apk-detail-item">
+                <span class="apk-detail-label">Tamaño</span>
+                <span class="apk-detail-val">14.4 MB</span>
+              </div>
+              <div class="apk-detail-item">
+                <span class="apk-detail-label">Requisito</span>
+                <span class="apk-detail-val">Android 5.0+</span>
+              </div>
+              <div class="apk-detail-item">
+                <span class="apk-detail-label">Estado</span>
+                <span class="apk-detail-val text-success">Verificado ✔</span>
+              </div>
+            </div>
+
+            <a href="apks/velox_play_movil.apk" class="btn-apk-download" download="velox_play_movil.apk">
+              <i class="bi bi-cloud-arrow-down-fill"></i> Descargar APK Celular
+            </a>
+          </div>
+        </div>
+
+        <!-- APK SMART TV (Android TV, TV Box, FireStick) -->
+        <div class="col-lg-5 col-md-6">
+          <div class="apk-card">
+            <div class="apk-card-top">
+              <div class="apk-icon-box tv-icon">
+                <i class="bi bi-tv"></i>
+              </div>
+              <div class="apk-title-info">
+                <h3>Velox Play TV</h3>
+                <span class="apk-meta-badge"><i class="bi bi-display text-info"></i> Smart TV & Box</span>
+              </div>
+            </div>
+
+            <p class="text-white-50 mb-3">
+              Diseñada 100% para control remoto: Android TV, Google TV, Xiaomi Mi Box y Fire TV Stick con navegación rápida.
+            </p>
+
+            <div class="apk-details-grid">
+              <div class="apk-detail-item">
+                <span class="apk-detail-label">Versión</span>
+                <span class="apk-detail-val">v2.4 TV Edition</span>
+              </div>
+              <div class="apk-detail-item">
+                <span class="apk-detail-label">Tamaño</span>
+                <span class="apk-detail-val">14.4 MB</span>
+              </div>
+              <div class="apk-detail-item">
+                <span class="apk-detail-label">Requisito</span>
+                <span class="apk-detail-val">Android TV / FireOS</span>
+              </div>
+              <div class="apk-detail-item">
+                <span class="apk-detail-label">Control</span>
+                <span class="apk-detail-val text-info">100% Remoto</span>
+              </div>
+            </div>
+
+            <a href="apks/velox_play_tv.apk" class="btn-apk-download btn-tv-download" download="velox_play_tv.apk">
+              <i class="bi bi-cloud-arrow-down-fill"></i> Descargar APK Smart TV
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN GUÍA DE INSTALACIÓN RÁPIDA -->
+  <section id="instalacion" class="install-guide-section">
+    <div class="container">
+      <div class="section-spooky-header">
+        <span class="section-badge"><i class="bi bi-gear-fill"></i> Fácil y Rápido</span>
+        <h2 class="section-title">¿Cómo Instalar Velox Play?</h2>
+        <p class="section-subtitle">
+          Solo toma un minuto. Sigue estos simples 3 pasos en tu teléfono o Smart TV.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="guide-step-card">
+            <div class="guide-step-number">1</div>
+            <h3 class="guide-step-title">Descarga el APK</h3>
+            <p class="guide-step-desc">
+              Presiona el botón de descarga correspondiente (Móvil o TV). En Smart TV o Fire TV Stick puedes usar la app <strong>Downloader</strong> introduciendo el enlace directo.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="guide-step-card">
+            <div class="guide-step-number">2</div>
+            <h3 class="guide-step-title">Habilita Orígenes Desconocidos</h3>
+            <p class="guide-step-desc">
+              Si tu dispositivo te solicita permisos, ve a <em>Ajustes > Seguridad / Aplicaciones</em> y activa la casilla para permitir instalar aplicaciones de fuentes desconocidas.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="guide-step-card">
+            <div class="guide-step-number">3</div>
+            <h3 class="guide-step-title">Instala y Disfruta</h3>
+            <p class="guide-step-desc">
+              Abre el archivo descargado, selecciona <strong>Instalar</strong> y ¡listo! Abre Velox Play y comienza a disfrutar de miles de películas, series, animes y fútbol en vivo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL DE PREVIEW / DETALLES DE CONTENIDO -->
+  <div class="modal fade modal-halloween" id="previewModal" tabindex="-1" aria-labelledby="modalContentTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-spooky fs-4 glow-orange" id="modalContentTitle">Detalles del Título</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img id="modalContentImg" src="" alt="Preview" class="img-fluid rounded-3 mb-3 w-100" style="max-height: 220px; object-fit: cover;">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-warning text-dark" id="modalContentCategory">Categoría</span>
+            <span class="badge bg-info text-dark" id="modalContentQuality">4K Ultra HD</span>
+          </div>
+          <p class="text-white-50" id="modalContentDesc">
+            Sinopsis y detalles del contenido.
+          </p>
+          <div class="alert alert-dark border-warning d-flex align-items-center gap-2 mb-0" style="background: rgba(255,117,24,0.1);">
+            <i class="bi bi-info-circle-fill glow-orange fs-4"></i>
+            <small class="text-white">Para ver este título completo en audio latino y sin publicidad, descárgalo en Velox Play.</small>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <a href="#descargas" class="btn btn-hero-download py-2" data-bs-dismiss="modal">
+            <i class="bi bi-download"></i> Descargar en Velox Play
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-halloween">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        <div class="col-lg-5">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <img src="assets/logo_halloween.png" alt="Velox Play" style="width: 38px; height: 38px;">
+            <span class="footer-brand-title">VELOX PLAY</span>
+          </div>
+          <p class="footer-desc">
+            La plataforma multimedia definitiva para reproducir tus contenidos favoritos en un solo lugar: cine de estreno, series completas, animes, doramas y los mejores encuentros de fútbol mundial.
+          </p>
+          <div class="d-flex gap-3">
+            <button class="btn btn-sm btn-outline-warning rounded-pill px-3" onclick="openVipWhatsApp('Footer')">
+              <i class="bi bi-whatsapp"></i> Chat Soporte VIP
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+          <h4 class="footer-links-title">Secciones</h4>
+          <ul class="footer-links-list">
+            <li><a href="#inicio"><i class="bi bi-chevron-right"></i> Inicio</a></li>
+            <li><a href="#catalogo"><i class="bi bi-chevron-right"></i> Películas y Series</a></li>
+            <li><a href="#catalogo"><i class="bi bi-chevron-right"></i> Anime y Doramas</a></li>
+            <li><a href="#catalogo"><i class="bi bi-chevron-right"></i> Fútbol en Vivo</a></li>
+            <li><a href="#planes"><i class="bi bi-chevron-right"></i> Pase VIP Cero Anuncios</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-6">
+          <h4 class="footer-links-title">Descargas</h4>
+          <ul class="footer-links-list">
+            <li><a href="apks/velox_play_movil.apk" download><i class="bi bi-phone"></i> APK para Móvil (14.4 MB)</a></li>
+            <li><a href="apks/velox_play_tv.apk" download><i class="bi bi-tv"></i> APK para Smart TV (14.4 MB)</a></li>
+            <li><a href="#instalacion"><i class="bi bi-book"></i> Guía para Smart TV / FireStick</a></li>
+            <li><a href="javascript:void(0)" onclick="openVipWhatsApp('Footer Activacion')"><i class="bi bi-gem"></i> Activar Cuenta VIP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+          <div>
+            © 2026 Velox Play - Edición Especial Halloween. Todos los derechos reservados.
+          </div>
+          <div>
+            <a href="#inicio" class="text-decoration-none text-muted" title="Subir al inicio">
+              Subir al inicio 🦇 <i class="bi bi-arrow-up-circle-fill glow-orange"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- JavaScript Personalizado Halloween -->
+  <script src="js/halloween.js"></script>
+</body>
+</html>
