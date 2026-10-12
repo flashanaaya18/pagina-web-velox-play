@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===================================================================
 // SISTEMA DE COMPRA VIP POR WHATSAPP (NÚMERO PRIVADO / OCULTO)
 // ===================================================================
-const _0x_v = "NTI1NjE2ODQwNTI0"; // 525616840524 en Base64
+const _0x_v = "NTI1NjE2ODQwNTI0"; // WhatsApp VIP Token Protegido
 
 function openVipWhatsApp(source = 'Boton Navideño') {
   playFestiveChime();

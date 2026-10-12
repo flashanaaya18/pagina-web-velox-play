@@ -543,8 +543,8 @@
               <h3 class="plan-title"><i class="bi bi-gem glow-orange"></i> Plan VIP Velox</h3>
               <p class="plan-tagline">La experiencia más rápida, fluida y sin interrupciones</p>
               <div class="plan-price-box">
-                <span class="plan-price-vip">VIP</span>
-                <span class="plan-period">/ Acceso Ilimitado</span>
+                <span class="plan-price-vip">Desde $79</span>
+                <span class="plan-period">MXN / mes</span>
               </div>
             </div>
 
@@ -570,7 +570,7 @@
             </ul>
 
             <!-- BOTÓN DE COMPRA VÍA WHATSAPP SIN EXPOSICIÓN DEL NÚMERO -->
-            <button class="btn-buy-vip-whatsapp" onclick="openVipWhatsApp('Tarjeta VIP')">
+            <button class="btn-buy-vip-whatsapp" onclick="openVipWhatsApp('Pase VIP', 79)">
               <i class="bi bi-whatsapp"></i> Comprar Acceso VIP en WhatsApp
             </button>
 
@@ -578,6 +578,93 @@
               <i class="bi bi-lock-fill text-success"></i> Activación inmediata • Chat oficial de soporte seguro
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- TARIFAS Y PAQUETES VIP DETALLADOS (1 MES, 2 MESES, 3 MESES, 4 MESES, 1 AÑO) -->
+      <div class="vip-packages-wrapper mt-5 pt-3">
+        <div class="text-center mb-4">
+          <span class="badge rounded-pill px-3 py-2 text-uppercase fw-bold" style="background: rgba(157, 78, 221, 0.2); color: #d8b4fe; border: 1px solid rgba(157,78,221,0.5);">
+            <i class="bi bi-tags-fill me-1"></i> Precios Oficiales de Suscripción VIP
+          </span>
+          <h3 class="text-white fw-bold mt-2 font-display" style="font-family: 'Outfit', sans-serif;">Elige la Duración de tu Cuenta VIP Cero Anuncios</h3>
+          <p class="text-white-50 small mb-0">Activación al instante en WhatsApp • Sin plazos forzosos • Compatible con Celulares y Smart TV</p>
+        </div>
+
+        <div class="vip-packages-grid">
+          <!-- 1 Mes: $79 -->
+          <div class="vip-package-box">
+            <span class="package-badge badge-promo">Básico</span>
+            <div class="package-duration">1 Mes</div>
+            <div class="package-price-wrap">
+              <span class="package-price">$79</span>
+              <span class="package-currency">MXN</span>
+            </div>
+            <div class="package-saving">30 días de Cero Anuncios</div>
+            <button class="btn-package-buy" onclick="openVipWhatsApp('1 Mes VIP', 79)">
+              <i class="bi bi-whatsapp"></i> Comprar $79
+            </button>
+          </div>
+
+          <!-- 2 Meses: $139 -->
+          <div class="vip-package-box">
+            <span class="package-badge badge-promo">Dúo</span>
+            <div class="package-duration">2 Meses</div>
+            <div class="package-price-wrap">
+              <span class="package-price">$139</span>
+              <span class="package-currency">MXN</span>
+            </div>
+            <div class="package-saving text-success">Ahorras $19 MXN</div>
+            <button class="btn-package-buy" onclick="openVipWhatsApp('2 Meses VIP', 139)">
+              <i class="bi bi-whatsapp"></i> Comprar $139
+            </button>
+          </div>
+
+          <!-- 3 Meses: $189 (Popular) -->
+          <div class="vip-package-box highlighted-package">
+            <span class="package-badge badge-popular"><i class="bi bi-star-fill"></i> Más Popular</span>
+            <div class="package-duration">3 Meses</div>
+            <div class="package-price-wrap">
+              <span class="package-price">$189</span>
+              <span class="package-currency">MXN</span>
+            </div>
+            <div class="package-saving text-warning">¡Solo $63/mes! (Ahorras $48)</div>
+            <button class="btn-package-buy" onclick="openVipWhatsApp('3 Meses VIP', 189)">
+              <i class="bi bi-whatsapp"></i> Comprar $189
+            </button>
+          </div>
+
+          <!-- 4 Meses: $239 -->
+          <div class="vip-package-box">
+            <span class="package-badge badge-promo">Pack 4 Meses</span>
+            <div class="package-duration">4 Meses</div>
+            <div class="package-price-wrap">
+              <span class="package-price">$239</span>
+              <span class="package-currency">MXN</span>
+            </div>
+            <div class="package-saving text-success">Ahorras $77 MXN</div>
+            <button class="btn-package-buy" onclick="openVipWhatsApp('4 Meses VIP', 239)">
+              <i class="bi bi-whatsapp"></i> Comprar $239
+            </button>
+          </div>
+
+          <!-- 1 Año: $500 (Mejor Oferta) -->
+          <div class="vip-package-box best-value-package">
+            <span class="package-badge badge-best"><i class="bi bi-fire"></i> Mejor Oferta</span>
+            <div class="package-duration">1 Año</div>
+            <div class="package-price-wrap">
+              <span class="package-price">$500</span>
+              <span class="package-currency">MXN</span>
+            </div>
+            <div class="package-saving text-warning fw-bold">¡Ahorras $448 MXN! (Todo el Año)</div>
+            <button class="btn-package-buy" onclick="openVipWhatsApp('1 Año VIP', 500)">
+              <i class="bi bi-whatsapp"></i> Comprar $500
+            </button>
+          </div>
+        </div>
+
+        <div class="text-center mt-3 text-white-50 small">
+          <i class="bi bi-shield-check text-success me-1"></i> Activación al instante por WhatsApp • Pago seguro con transferencia o depósito • Privacidad 100% protegida
         </div>
       </div>
     </div>

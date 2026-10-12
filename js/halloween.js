@@ -17,13 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
 // SISTEMA DE COMPRA VIP POR WHATSAPP (NÚMERO PRIVADO / OCULTO)
 // Cumple con el requerimiento de compra sin exponer el número directamente
 // ===================================================================
-const _0x_v = "NTI1NjE2ODQwNTI0"; // 525616840524 en Base64
+const _0x_v = "NTI1NjE2ODQwNTI0"; // WhatsApp VIP Token Protegido
 
-function openVipWhatsApp(source = 'Boton Principal') {
+function openVipWhatsApp(planName = 'Pase VIP', price = null) {
   playSpookyTone(440, 'triangle', 0.25);
   
   const phone = atob(_0x_v);
-  const msg = `🎃 ¡Hola Velox Play! Me interesa comprar el acceso VIP Cero Anuncios (${source}). ¿Me comparten los métodos de pago y activación inmediata?`;
+  let msg = '';
+  if (price) {
+    msg = `🎃 ¡Hola Velox Play! Me interesa comprar la cuenta VIP Cero Anuncios del plan: ${planName} ($${price} MXN). ¿Cuáles son las cuentas o métodos de pago disponibles para activación inmediata? ⭐`;
+  } else {
+    msg = `🎃 ¡Hola Velox Play! Me interesa comprar el acceso VIP Cero Anuncios (${planName}). ¿Me comparten los métodos de pago y activación inmediata?`;
+  }
   const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
   
   window.open(url, '_blank');
