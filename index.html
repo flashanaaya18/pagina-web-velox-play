@@ -3,21 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Velox Play 🎃 | Películas, Series, Anime, Doramas y Fútbol en Vivo</title>
-  <meta name="description" content="Descarga Velox Play Edición Especial Halloween. Disfruta de películas, series completas, animes, doramas y fútbol en vivo. Disponible en versión Gratis con anuncios y VIP Cero Anuncios.">
-  <meta name="keywords" content="Velox Play, streaming, peliculas, series, anime, doramas, futbol en vivo, halloween, apk tv, apk movil, vip cero anuncios">
+  <title>Velox Play 🎃 | Películas, Series, Anime, Doramas y Fútbol en Vivo (Edición Halloween)</title>
+  <meta name="description" content="Descarga Velox Play Edición Especial Halloween. Disfruta de películas de terror y taquilla, series completas, animes, doramas y fútbol en vivo. APKs para Móvil y Smart TV (ARM32, ARM64, x86). Disponible Gratis con anuncios y VIP Cero Anuncios.">
+  <meta name="keywords" content="Velox Play, streaming, peliculas terror, series, anime, doramas, futbol en vivo, halloween, apk tv arm32, apk tv arm64, apk tv x86, apk movil, vip cero anuncios">
   <meta name="theme-color" content="#ff7518">
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="zlQNjWE6OFHN865LurIUWlt7oC6sPOC-aTfbMzc9YiA" />
+
+  <!-- Google Analytics / gtag.js Verification -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VELOXPLAY01"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-VELOXPLAY01');
+  </script>
 
   <!-- Open Graph / Redes Sociales -->
   <meta property="og:title" content="Velox Play 🎃 - Streaming de Películas, Anime, Doramas y Fútbol">
-  <meta property="og:description" content="Disfruta de la mejor app de streaming para Móvil y Smart TV. ¡Edición Especial Halloween!">
+  <meta property="og:description" content="Disfruta de la mejor app de streaming para Celular y Smart TV. ¡Edición Especial Halloween!">
   <meta property="og:image" content="assets/hero_halloween.jpg">
   <meta property="og:type" content="website">
 
-  <!-- Favicon -->
+  <!-- Favicon Halloween -->
   <link rel="icon" type="image/png" href="assets/logo_halloween.png">
 
-  <!-- Google Fonts: Creepster (Terror/Halloween) & Outfit (Modern UI) -->
+  <!-- Google Fonts: Creepster (Terror/Halloween) & Outfit (UI Moderna) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -28,7 +41,7 @@
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <!-- Animate.css para Micro-Animaciones -->
+  <!-- Animate.css para Animaciones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <!-- Estilos Personalizados Halloween -->
@@ -80,7 +93,22 @@
     </div>
   </div>
 
-  <!-- Mascotita Fantasma Flotante (Sticker Interactivo) -->
+  <!-- Brujita Voladora en Escoba (Animación Continua sin Fondo) -->
+  <div class="witch-flying-container" aria-hidden="true">
+    <img src="assets/witch_flying.png" alt="Brujita Voladora Velox" class="witch-img">
+  </div>
+
+  <!-- Arañita Colgante en Hilo de Seda (Animación de Balanceo y Descenso) -->
+  <div class="spider-hanging-container" aria-hidden="true">
+    <img src="assets/spider_hanging.png" alt="Arañita Velox Play" class="spider-img">
+  </div>
+
+  <!-- Calabaza Flotante con Alas de Murciélago y Auriculares (Sticker Interactivo) -->
+  <div class="pumpkin-batwings-floating" title="¡Toca a la Calabaza Velox Play!">
+    <img src="assets/pumpkin_batwings.png" alt="Calabaza Alada Velox Play" class="pumpkin-batwings-img">
+  </div>
+
+  <!-- Mascota Fantasma Flotante (Sticker Interactivo Sin Fondo) -->
   <div class="ghost-mascot-sticker" onclick="openVipWhatsApp('Sticker Fantasma')" title="¡Disfruta sin anuncios con VIP!">
     <div class="ghost-bubble">¡Pase VIP Cero Anuncios! 🎃</div>
     <img src="assets/ghost_streaming.png" alt="Fantasma Velox Play" class="ghost-img">
@@ -149,10 +177,10 @@
           </h1>
 
           <p class="hero-subtitle">
-            Tu centro de streaming definitivo: <strong class="glow-orange">Películas de taquilla y terror</strong>, 
+            Tu centro de streaming definitivo: <strong class="glow-orange">Películas de terror y taquilla</strong>, 
             <strong class="glow-purple">Series completas</strong>, <strong class="glow-orange">Animes en estreno</strong>, 
             <strong class="glow-purple">Doramas populares</strong> y <strong class="glow-green">Fútbol en Vivo</strong> sin cortes.
-            Disfruta en tu celular, tablet o Smart TV.
+            Nuevas versiones optimizadas para <strong class="text-white">Smart TV (ARM32, ARM64, x86)</strong> y <strong class="text-white">Celulares Android</strong>.
           </p>
 
           <!-- Botones de Acción Inmediata -->
@@ -160,8 +188,8 @@
             <a href="apks/velox_play_movil.apk" class="btn-hero-download" download="velox_play_movil.apk">
               <i class="bi bi-phone"></i> APK Móvil (Android)
             </a>
-            <a href="apks/velox_play_tv.apk" class="btn-hero-tv" download="velox_play_tv.apk">
-              <i class="bi bi-tv"></i> APK Smart TV
+            <a href="#descargas-tv" class="btn-hero-tv">
+              <i class="bi bi-tv"></i> Nuevos APKs para TV 📺
             </a>
             <button class="btn-hero-vip" onclick="openVipWhatsApp('Hero VIP')">
               <i class="bi bi-shield-fill-check"></i> Pase VIP (Cero Anuncios)
@@ -170,7 +198,7 @@
 
           <!-- Mini Badges de Beneficios -->
           <div class="hero-badges-strip justify-content-center justify-content-lg-start">
-            <span class="feature-mini-pill"><i class="bi bi-check2-circle glow-orange"></i> 100% Compatible Android</span>
+            <span class="feature-mini-pill"><i class="bi bi-tv glow-orange"></i> Nuevos APKs para Smart TV</span>
             <span class="feature-mini-pill"><i class="bi bi-lightning-charge-fill glow-orange"></i> Servidores Rápidos</span>
             <span class="feature-mini-pill"><i class="bi bi-badge-hd-fill glow-purple"></i> Full HD & 4K</span>
             <span class="feature-mini-pill"><i class="bi bi-slash-circle-fill glow-green"></i> Opción Sin Publicidad</span>
@@ -193,12 +221,15 @@
         </div>
       </div>
     </div>
+    <!-- Niebla Fantasmagórica Rodante -->
+    <div class="creepy-fog-overlay" aria-hidden="true"></div>
   </header>
 
   <!-- BANNER DESTACADO DE TEMPORADA HALLOWEEN -->
   <section class="container my-5">
     <div class="halloween-feature-banner">
       <img src="assets/halloween_special.jpg" alt="Especial Noche de Brujas" class="banner-bg-img">
+      <div class="creepy-fog-overlay" aria-hidden="true"></div>
       <div class="banner-overlay-content">
         <div>
           <span class="badge bg-danger text-white px-3 py-2 rounded-pill mb-2">🔥 FESTIVAL DE TERROR 2026</span>
@@ -552,39 +583,39 @@
     </div>
   </section>
 
-  <!-- SECCIÓN DESCARGAS (APKS) -->
+  <!-- SECCIÓN DESCARGAS (NUEVOS APKS SMART TV & MÓVIL) -->
   <section id="descargas" class="download-section">
     <div class="container">
       <div class="section-spooky-header">
-        <span class="section-badge"><i class="bi bi-download"></i> Instalación Directa</span>
-        <h2 class="section-title">Descarga Velox Play</h2>
+        <span class="section-badge"><i class="bi bi-download"></i> Instalación Oficial</span>
+        <h2 class="section-title">Centro de Descargas Velox Play</h2>
         <p class="section-subtitle">
-          Archivos APK oficiales listos para instalar. Seguros, optimizados y con la última actualización de Halloween.
+          Archivos APK oficiales listos para instalar. Seguros, optimizados y con soporte multi-arquitectura para Smart TV y Celulares.
         </p>
       </div>
 
-      <div class="row g-4 justify-content-center">
-        <!-- APK MÓVIL (Android Celular y Tablet) -->
-        <div class="col-lg-5 col-md-6">
+      <!-- DESCARGA PRINCIPAL CELULAR -->
+      <div class="row g-4 justify-content-center mb-5">
+        <div class="col-lg-8">
           <div class="apk-card">
             <div class="apk-card-top">
               <div class="apk-icon-box mobile-icon">
                 <i class="bi bi-phone"></i>
               </div>
               <div class="apk-title-info">
-                <h3>Velox Play Móvil</h3>
-                <span class="apk-meta-badge"><i class="bi bi-android2 text-success"></i> Móvil & Tablet</span>
+                <h3>Velox Play Móvil & Tablets</h3>
+                <span class="apk-meta-badge"><i class="bi bi-android2 text-success"></i> Compatible con Celulares Android</span>
               </div>
             </div>
 
             <p class="text-white-50 mb-3">
-              Versión adaptada con interfaz táctil fluida, controles gestuales de brillo y volumen, y modo picture-in-picture.
+              Versión táctil ultra rápida para cualquier teléfono o tablet Android (Samsung, Xiaomi, Motorola, Huawei, Oppo, Realme, etc.). Con controles gestuales de brillo, volumen y pantalla completa.
             </p>
 
             <div class="apk-details-grid">
               <div class="apk-detail-item">
                 <span class="apk-detail-label">Versión</span>
-                <span class="apk-detail-val">v2.4 Halloween</span>
+                <span class="apk-detail-val">v2.4 Halloween Mobile</span>
               </div>
               <div class="apk-detail-item">
                 <span class="apk-detail-label">Tamaño</span>
@@ -592,62 +623,163 @@
               </div>
               <div class="apk-detail-item">
                 <span class="apk-detail-label">Requisito</span>
-                <span class="apk-detail-val">Android 5.0+</span>
+                <span class="apk-detail-val">Android 5.0 o superior</span>
               </div>
               <div class="apk-detail-item">
                 <span class="apk-detail-label">Estado</span>
-                <span class="apk-detail-val text-success">Verificado ✔</span>
+                <span class="apk-detail-val text-success">Verificado ✔ Seguro</span>
               </div>
             </div>
 
             <a href="apks/velox_play_movil.apk" class="btn-apk-download" download="velox_play_movil.apk">
-              <i class="bi bi-cloud-arrow-down-fill"></i> Descargar APK Celular
-            </a>
-          </div>
-        </div>
-
-        <!-- APK SMART TV (Android TV, TV Box, FireStick) -->
-        <div class="col-lg-5 col-md-6">
-          <div class="apk-card">
-            <div class="apk-card-top">
-              <div class="apk-icon-box tv-icon">
-                <i class="bi bi-tv"></i>
-              </div>
-              <div class="apk-title-info">
-                <h3>Velox Play TV</h3>
-                <span class="apk-meta-badge"><i class="bi bi-display text-info"></i> Smart TV & Box</span>
-              </div>
-            </div>
-
-            <p class="text-white-50 mb-3">
-              Diseñada 100% para control remoto: Android TV, Google TV, Xiaomi Mi Box y Fire TV Stick con navegación rápida.
-            </p>
-
-            <div class="apk-details-grid">
-              <div class="apk-detail-item">
-                <span class="apk-detail-label">Versión</span>
-                <span class="apk-detail-val">v2.4 TV Edition</span>
-              </div>
-              <div class="apk-detail-item">
-                <span class="apk-detail-label">Tamaño</span>
-                <span class="apk-detail-val">14.4 MB</span>
-              </div>
-              <div class="apk-detail-item">
-                <span class="apk-detail-label">Requisito</span>
-                <span class="apk-detail-val">Android TV / FireOS</span>
-              </div>
-              <div class="apk-detail-item">
-                <span class="apk-detail-label">Control</span>
-                <span class="apk-detail-val text-info">100% Remoto</span>
-              </div>
-            </div>
-
-            <a href="apks/velox_play_tv.apk" class="btn-apk-download btn-tv-download" download="velox_play_tv.apk">
-              <i class="bi bi-cloud-arrow-down-fill"></i> Descargar APK Smart TV
+              <i class="bi bi-cloud-arrow-down-fill"></i> Descargar APK Celular (14.4 MB)
             </a>
           </div>
         </div>
       </div>
+
+      <!-- NUEVAS VERSIONES DE SMART TV (ARM32, ARM64, X86) -->
+      <div id="descargas-tv" class="pt-3">
+        <div class="text-center mb-4">
+          <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold text-uppercase fs-6">
+            <i class="bi bi-tv-fill"></i> Nuevas Versiones Oficiales para Smart TV
+          </span>
+          <h3 class="text-white fw-bold mt-2">Elige la versión adecuada para tu Smart TV o TV Box</h3>
+          <p class="text-white-50">Si tienes dudas sobre cuál descargar, <strong class="text-warning">ARM 32-bit</strong> funciona en más del 95% de Smart TVs y FireSticks.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+
+          <!-- 1. TV ARM 32-BIT (RECOMENDADO / MÁS COMPATIBLE) -->
+          <div class="col-lg-4 col-md-6">
+            <div class="apk-card apk-card-tv-recommended">
+              <div class="recommended-arch-tag">⭐ Más Recomendado</div>
+              <div class="apk-card-top">
+                <div class="apk-icon-box tv-icon">
+                  <i class="bi bi-tv"></i>
+                </div>
+                <div class="apk-title-info">
+                  <h3>Velox TV ARM32</h3>
+                  <span class="arch-pill">Universal (32-bit)</span>
+                </div>
+              </div>
+
+              <p class="text-white-50 mb-3">
+                <strong>La versión más compatible</strong>: Diseñada para Fire TV Stick (todos los modelos), Xiaomi Mi Box, Chromecast con Google TV y la mayoría de TV Boxes.
+              </p>
+
+              <div class="apk-details-grid">
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Arquitectura</span>
+                  <span class="apk-detail-val">armeabi-v7a (32b)</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Tamaño</span>
+                  <span class="apk-detail-val">14.3 MB</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Dispositivos</span>
+                  <span class="apk-detail-val">95% de Smart TVs</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Control</span>
+                  <span class="apk-detail-val text-info">100% Remoto</span>
+                </div>
+              </div>
+
+              <a href="apks/velox_play_tv_arm32.apk" class="btn-apk-download btn-tv-download" download="velox_play_tv_arm32.apk">
+                <i class="bi bi-download"></i> Descargar ARM 32-bit
+              </a>
+            </div>
+          </div>
+
+          <!-- 2. TV ARM 64-BIT (SMART TV DE GAMA ALTA) -->
+          <div class="col-lg-4 col-md-6">
+            <div class="apk-card">
+              <div class="apk-card-top">
+                <div class="apk-icon-box tv-icon" style="background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);">
+                  <i class="bi bi-cpu"></i>
+                </div>
+                <div class="apk-title-info">
+                  <h3>Velox TV ARM64</h3>
+                  <span class="arch-pill">Gama Alta (64-bit)</span>
+                </div>
+              </div>
+
+              <p class="text-white-50 mb-3">
+                Para Smart TVs modernas de última generación y procesadores de 64 bits (Nvidia Shield TV, Google TV modernos, procesadores Amlogic/Realtek 64-bit).
+              </p>
+
+              <div class="apk-details-grid">
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Arquitectura</span>
+                  <span class="apk-detail-val">arm64-v8a (64b)</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Tamaño</span>
+                  <span class="apk-detail-val">14.3 MB</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Rendimiento</span>
+                  <span class="apk-detail-val text-success">Máxima Velocidad</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Control</span>
+                  <span class="apk-detail-val text-info">100% Remoto</span>
+                </div>
+              </div>
+
+              <a href="apks/velox_play_tv_arm64.apk" class="btn-apk-download btn-tv-download" style="background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);" download="velox_play_tv_arm64.apk">
+                <i class="bi bi-download"></i> Descargar ARM 64-bit
+              </a>
+            </div>
+          </div>
+
+          <!-- 3. TV X86 (EMULADORES Y CHIPS INTEL) -->
+          <div class="col-lg-4 col-md-6">
+            <div class="apk-card">
+              <div class="apk-card-top">
+                <div class="apk-icon-box tv-icon" style="background: linear-gradient(135deg, #ff5400 0%, #d00000 100%);">
+                  <i class="bi bi-display"></i>
+                </div>
+                <div class="apk-title-info">
+                  <h3>Velox TV x86</h3>
+                  <span class="arch-pill">Emuladores / PC</span>
+                </div>
+              </div>
+
+              <p class="text-white-50 mb-3">
+                Diseñado para emuladores Android en PC (BlueStacks, LDPlayer, Nox Player, MEmu) o dispositivos Android basados en procesadores Intel x86.
+              </p>
+
+              <div class="apk-details-grid">
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Arquitectura</span>
+                  <span class="apk-detail-val">x86 (Intel / PC)</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Tamaño</span>
+                  <span class="apk-detail-val">14.3 MB</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Uso Ideal</span>
+                  <span class="apk-detail-val">Emuladores PC</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Soporte</span>
+                  <span class="apk-detail-val text-warning">Teclado / Ratón</span>
+                </div>
+              </div>
+
+              <a href="apks/velox_play_tv_x86.apk" class="btn-apk-download btn-tv-download" style="background: linear-gradient(135deg, #ff5400 0%, #d00000 100%);" download="velox_play_tv_x86.apk">
+                <i class="bi bi-download"></i> Descargar x86
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -656,7 +788,7 @@
     <div class="container">
       <div class="section-spooky-header">
         <span class="section-badge"><i class="bi bi-gear-fill"></i> Fácil y Rápido</span>
-        <h2 class="section-title">¿Cómo Instalar Velox Play?</h2>
+        <h2 class="section-title">¿Cómo Instalar Velox Play en Smart TV y Móvil?</h2>
         <p class="section-subtitle">
           Solo toma un minuto. Sigue estos simples 3 pasos en tu teléfono o Smart TV.
         </p>
@@ -668,7 +800,7 @@
             <div class="guide-step-number">1</div>
             <h3 class="guide-step-title">Descarga el APK</h3>
             <p class="guide-step-desc">
-              Presiona el botón de descarga correspondiente (Móvil o TV). En Smart TV o Fire TV Stick puedes usar la app <strong>Downloader</strong> introduciendo el enlace directo.
+              Presiona el botón de descarga para Celular o TV (ARM32 recomendado). En Smart TV o Fire TV Stick puedes usar la app gratuita <strong>Downloader</strong> introduciendo el enlace directo del APK.
             </p>
           </div>
         </div>
@@ -678,7 +810,7 @@
             <div class="guide-step-number">2</div>
             <h3 class="guide-step-title">Habilita Orígenes Desconocidos</h3>
             <p class="guide-step-desc">
-              Si tu dispositivo te solicita permisos, ve a <em>Ajustes > Seguridad / Aplicaciones</em> y activa la casilla para permitir instalar aplicaciones de fuentes desconocidas.
+              Si tu dispositivo te solicita permisos, ve a <em>Ajustes > Seguridad / Aplicaciones</em> y activa la opción para permitir instalar aplicaciones de fuentes desconocidas.
             </p>
           </div>
         </div>
@@ -688,7 +820,7 @@
             <div class="guide-step-number">3</div>
             <h3 class="guide-step-title">Instala y Disfruta</h3>
             <p class="guide-step-desc">
-              Abre el archivo descargado, selecciona <strong>Instalar</strong> y ¡listo! Abre Velox Play y comienza a disfrutar de miles de películas, series, animes y fútbol en vivo.
+              Abre el archivo descargado, presiona <strong>Instalar</strong> y ¡listo! Abre Velox Play con tu control remoto o pantalla táctil y disfruta de todo el contenido.
             </p>
           </div>
         </div>
@@ -759,12 +891,13 @@
         </div>
 
         <div class="col-lg-3 col-6">
-          <h4 class="footer-links-title">Descargas</h4>
+          <h4 class="footer-links-title">Descargas APK</h4>
           <ul class="footer-links-list">
-            <li><a href="apks/velox_play_movil.apk" download><i class="bi bi-phone"></i> APK para Móvil (14.4 MB)</a></li>
-            <li><a href="apks/velox_play_tv.apk" download><i class="bi bi-tv"></i> APK para Smart TV (14.4 MB)</a></li>
-            <li><a href="#instalacion"><i class="bi bi-book"></i> Guía para Smart TV / FireStick</a></li>
-            <li><a href="javascript:void(0)" onclick="openVipWhatsApp('Footer Activacion')"><i class="bi bi-gem"></i> Activar Cuenta VIP</a></li>
+            <li><a href="apks/velox_play_movil.apk" download><i class="bi bi-phone"></i> APK Móvil Android (14.4 MB)</a></li>
+            <li><a href="apks/velox_play_tv_arm32.apk" download><i class="bi bi-tv"></i> APK Smart TV ARM32 (Recomendado)</a></li>
+            <li><a href="apks/velox_play_tv_arm64.apk" download><i class="bi bi-cpu"></i> APK Smart TV ARM64</a></li>
+            <li><a href="apks/velox_play_tv_x86.apk" download><i class="bi bi-display"></i> APK Smart TV x86 (PC)</a></li>
+            <li><a href="#instalacion"><i class="bi bi-book"></i> Guía con app Downloader</a></li>
           </ul>
         </div>
       </div>

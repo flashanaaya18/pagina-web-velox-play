@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initAudioSystem();
   initModals();
   initApkDownloads();
+  initMagicCursorTrail();
+  initInteractiveHalloweenCharacters();
 });
 
 // ===================================================================
@@ -281,3 +283,109 @@ function showDownloadToast() {
     toastEl.style.opacity = '0';
   }, 4500);
 }
+
+// ===================================================================
+// CURSOR MÁGICO DE HALLOWEEN (DESTELLOS Y BRASAS EN MOVIMIENTO)
+// ===================================================================
+function initMagicCursorTrail() {
+  if (window.innerWidth < 768) return; // Solo en PC / pantallas con puntero
+
+  const colors = ['#ff7518', '#ff5400', '#9d4edd', '#39ff14', '#ffd166'];
+  let lastX = 0;
+  let lastY = 0;
+  let throttle = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - throttle < 35) return;
+    throttle = now;
+
+    const sparkle = document.createElement('div');
+    sparkle.className = 'cursor-magic-sparkle';
+    sparkle.style.left = `${e.clientX - 4}px`;
+    sparkle.style.top = `${e.clientY - 4}px`;
+    const col = colors[Math.floor(Math.random() * colors.length)];
+    sparkle.style.background = col;
+    sparkle.style.color = col;
+
+    document.body.appendChild(sparkle);
+
+    const destX = (Math.random() - 0.5) * 30;
+    const destY = (Math.random() - 0.5) * 30 + 15;
+
+    requestAnimationFrame(() => {
+      sparkle.style.transform = `translate(${destX}px, ${destY}px) scale(0)`;
+      sparkle.style.opacity = '0';
+    });
+
+    setTimeout(() => {
+      sparkle.remove();
+    }, 450);
+  });
+}
+
+// ===================================================================
+// INTERACCIONES CON PERSONAJES DE HALLOWEEN FLOTANTES
+// ===================================================================
+function initInteractiveHalloweenCharacters() {
+  const pumpkinBat = document.querySelector('.pumpkin-batwings-floating');
+  if (pumpkinBat) {
+    pumpkinBat.addEventListener('click', () => {
+      playSpookyTone(700, 'sawtooth', 0.35);
+      showCharacterToast("🎃 ¡Calabaza Voladora Velox!", "¡Descarga Velox Play y no te pierdas el terror!");
+    });
+  }
+
+  const ghostMascot = document.querySelector('.ghost-mascot-sticker');
+  if (ghostMascot) {
+    ghostMascot.addEventListener('click', () => {
+      playSpookyChime();
+    });
+  }
+}
+
+function showCharacterToast(title, subtitle) {
+  let toastEl = document.getElementById('char-toast');
+  if (!toastEl) {
+    toastEl = document.createElement('div');
+    toastEl.id = 'char-toast';
+    toastEl.style.cssText = `
+      position: fixed;
+      bottom: 120px;
+      left: 25px;
+      z-index: 1060;
+      background: rgba(18, 10, 32, 0.95);
+      border: 1px solid #9d4edd;
+      border-radius: 16px;
+      padding: 14px 20px;
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(157, 78, 221, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.4s ease;
+      transform: translateY(20px);
+      opacity: 0;
+    `;
+    document.body.appendChild(toastEl);
+  }
+
+  toastEl.innerHTML = `
+    <div style="font-size: 1.8rem;">🦇</div>
+    <div>
+      <div style="font-weight: 800; color: #ff7518;">${title}</div>
+      <div style="font-size: 0.82rem; color: #d0cce3;">${subtitle}</div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    toastEl.style.transform = 'translateY(0)';
+    toastEl.style.opacity = '1';
+  }, 50);
+
+  setTimeout(() => {
+    toastEl.style.transform = 'translateY(20px)';
+    toastEl.style.opacity = '0';
+  }, 4000);
+}
+
