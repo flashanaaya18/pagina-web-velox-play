@@ -835,32 +835,163 @@ body {
   border-radius: 24px;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(255, 117, 24, 0.3);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 117, 24, 0.25);
+  border: 2px solid rgba(255, 117, 24, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 117, 24, 0.35);
   margin-bottom: 70px;
+  animation: bannerBorderGlow 4s ease-in-out infinite alternate;
+  background: #090511;
 }
+
+@keyframes bannerBorderGlow {
+  0% {
+    border-color: rgba(255, 117, 24, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 117, 24, 0.3);
+  }
+  50% {
+    border-color: rgba(157, 78, 221, 0.7);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 45px rgba(157, 78, 221, 0.45);
+  }
+  100% {
+    border-color: rgba(255, 117, 24, 0.9);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 50px rgba(255, 117, 24, 0.6);
+  }
+}
+
 .banner-bg-img {
   width: 100%;
-  height: 380px;
-  object-fit: cover;
+  height: auto;
   display: block;
+  animation: bannerSubtleZoom 12s ease-in-out infinite alternate;
+  filter: contrast(1.06) brightness(1.02);
+  transition: transform 0.6s ease;
 }
+
+@keyframes bannerSubtleZoom {
+  0% {
+    transform: scale(1.0) translateY(0);
+  }
+  100% {
+    transform: scale(1.05) translateY(-5px);
+  }
+}
+
+/* Destello de relámpago sutil en el banner */
+.banner-lightning-flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 65% 30%, rgba(200, 160, 255, 0.28) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+  animation: bannerThunderFlash 9s ease-in-out infinite;
+}
+
+@keyframes bannerThunderFlash {
+  0%, 72%, 78%, 100% { opacity: 0; }
+  73% { opacity: 0.7; }
+  74% { opacity: 0.1; }
+  75% { opacity: 0.85; }
+  76% { opacity: 0.2; }
+  77% { opacity: 0.5; }
+}
+
+/* Murciélagos animados cruzando el banner */
+.banner-bats-strip {
+  position: absolute;
+  top: 25px;
+  right: -50px;
+  width: 100%;
+  height: 120px;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.mini-flying-bat {
+  position: absolute;
+  font-size: 1.4rem;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.8));
+}
+
+.mini-flying-bat.bat-one {
+  animation: flyBatCross 11s linear infinite;
+  top: 20px;
+}
+
+.mini-flying-bat.bat-two {
+  animation: flyBatCross 15s linear 4s infinite;
+  top: 55px;
+  font-size: 1.1rem;
+}
+
+@keyframes flyBatCross {
+  0% {
+    right: -40px;
+    transform: translateY(0px) scale(0.9) rotate(-10deg);
+  }
+  25% {
+    transform: translateY(-15px) scale(1.1) rotate(5deg);
+  }
+  50% {
+    transform: translateY(10px) scale(0.95) rotate(-8deg);
+  }
+  75% {
+    transform: translateY(-12px) scale(1.05) rotate(4deg);
+  }
+  100% {
+    right: 105%;
+    transform: translateY(0px) scale(0.9) rotate(-10deg);
+  }
+}
+
+.banner-animated-title {
+  text-shadow: 0 0 15px rgba(255, 117, 24, 0.8), 0 0 30px rgba(255, 69, 0, 0.5);
+  animation: titleGlowFlicker 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlowFlicker {
+  0% {
+    text-shadow: 0 0 15px rgba(255, 117, 24, 0.7), 0 0 25px rgba(255, 69, 0, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(255, 117, 24, 1), 0 0 45px rgba(255, 69, 0, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 18px rgba(255, 117, 24, 0.85), 0 0 35px rgba(255, 69, 0, 0.6);
+  }
+}
+
 .banner-overlay-content {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 40px;
-  background: linear-gradient(180deg, transparent 0%, rgba(9, 5, 17, 0.95) 85%);
+  padding: 20px 32px;
+  background: linear-gradient(180deg, transparent 0%, rgba(9, 5, 17, 0.90) 80%);
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
+  z-index: 3;
 }
 @media (max-width: 768px) {
-  .banner-bg-img { height: 260px; }
-  .banner-overlay-content { padding: 20px; }
+  .halloween-feature-banner {
+    aspect-ratio: auto;
+    min-height: auto;
+  }
+  .banner-bg-img {
+    height: 260px;
+  }
+  .banner-overlay-content {
+    padding: 16px;
+    background: linear-gradient(180deg, transparent 0%, rgba(9, 5, 17, 0.95) 60%);
+    gap: 10px;
+  }
 }
 
 /* ===================================================================

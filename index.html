@@ -225,17 +225,30 @@
     <div class="creepy-fog-overlay" aria-hidden="true"></div>
   </header>
 
-  <!-- BANNER DESTACADO DE TEMPORADA HALLOWEEN -->
+  <!-- BANNER DESTACADO DE TEMPORADA HALLOWEEN (ANIMADO SIN VIDEO) -->
   <section class="container my-5">
     <div class="halloween-feature-banner">
-      <img src="assets/halloween_special.jpg" alt="Especial Noche de Brujas" class="banner-bg-img">
+      <!-- Imagen Animada en WebP (Alta Definición) con Fallback GIF -->
+      <picture>
+        <source srcset="assets/halloween_special.webp" type="image/webp">
+        <img src="assets/halloween_special.gif" alt="Especial Noche de Brujas Animado" class="banner-bg-img" loading="eager">
+      </picture>
+
+      <!-- Efectos Atmosféricos Animados: Relámpagos, Niebla y Murciélagos Cruzando -->
+      <div class="banner-lightning-flash" aria-hidden="true"></div>
       <div class="creepy-fog-overlay" aria-hidden="true"></div>
+      <div class="banner-bats-strip" aria-hidden="true">
+        <span class="mini-flying-bat bat-one">🦇</span>
+        <span class="mini-flying-bat bat-two">🦇</span>
+      </div>
+
       <div class="banner-overlay-content">
-        <div>
-          <span class="badge bg-danger text-white px-3 py-2 rounded-pill mb-2">🔥 FESTIVAL DE TERROR 2026</span>
-          <h2 class="font-spooky fs-1 text-white mb-2">MARATÓN NOCHE DE BRUJAS</h2>
-          <p class="text-white-50 mb-0 max-w-500">
-            Descubre los mejores estrenos de cine de suspenso, series de miedo, clásicos espeluznantes y animes oscuros en Velox Play.
+        <div class="banner-text-info">
+          <span class="badge bg-danger text-white px-3 py-1 rounded-pill mb-1">
+            🔥 FESTIVAL DE TERROR 2026 • EDICIÓN ESPECIAL
+          </span>
+          <p class="text-white-50 mb-0 small max-w-500">
+            Estrenos de cine de suspenso, series de miedo, animes oscuros y fútbol en vivo en Velox Play.
           </p>
         </div>
         <div>
