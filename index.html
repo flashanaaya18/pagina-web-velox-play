@@ -21,6 +21,26 @@
     gtag('config', 'G-VELOXPLAY01');
   </script>
 
+  <!-- Detección de URL: Activa Smart TV solo si la URL contiene 'smart-tv' o 'tv' -->
+  <script>
+    (function() {
+      try {
+        var href = (window.location.href || '').toLowerCase();
+        var search = (window.location.search || '').toLowerCase();
+        var hash = (window.location.hash || '').toLowerCase();
+        if (
+          href.indexOf('smart-tv') !== -1 || 
+          href.indexOf('smarttv') !== -1 || 
+          href.indexOf('smart_tv') !== -1 || 
+          search.indexOf('tv') !== -1 || 
+          hash.indexOf('smart-tv') !== -1
+        ) {
+          window.location.replace('tv.html');
+        }
+      } catch(e) {}
+    })();
+  </script>
+
   <!-- Open Graph / Redes Sociales -->
   <meta property="og:title" content="Velox Play 🎃 - Streaming de Películas, Anime, Doramas y Fútbol">
   <meta property="og:description" content="Disfruta de la mejor app de streaming para Celular y Smart TV. ¡Edición Especial Halloween!">
@@ -108,10 +128,12 @@
     <img src="assets/pumpkin_batwings.png" alt="Calabaza Alada Velox Play" class="pumpkin-batwings-img">
   </div>
 
-  <!-- Mascota Fantasma Flotante (Sticker Interactivo Sin Fondo) -->
-  <div class="ghost-mascot-sticker" onclick="openVipWhatsApp('Sticker Fantasma')" title="¡Disfruta sin anuncios con VIP!">
-    <div class="ghost-bubble">¡Pase VIP Cero Anuncios! 🎃</div>
-    <img src="assets/ghost_streaming.png" alt="Fantasma Velox Play" class="ghost-img">
+  <!-- MASCOTA OFICIAL "VELOX" FLOTANTE (INTERACTIVA, CAMBIO DE POSES Y DIÁLOGOS SIN FONDO) -->
+  <div class="velox-mascot-floating" id="veloxMascotFloating" onclick="interactVeloxMascot()" title="¡Toca a Velox para interactuar!">
+    <div class="velox-bubble animate__animated" id="veloxBubble">
+      ¡Hola! Soy Velox 🦊⚡ <em>(Tócame para hablar)</em>
+    </div>
+    <img src="assets/mascot_velox_waving.png" alt="Velox Mascota Oficial" id="veloxMascotImg" class="velox-floating-img">
   </div>
 
   <!-- NAVBAR -->
@@ -145,6 +167,12 @@
           </li>
           <li class="nav-item">
             <a class="nav-link nav-link-custom" href="#instalacion"><i class="bi bi-info-circle"></i> Guía TV / Móvil</a>
+          </li>
+          <!-- Acceso Especial Modo Smart TV Web -->
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom fw-bold text-warning" href="tv.html" target="_blank" title="Abrir versión para navegador de Smart TV">
+              <i class="bi bi-tv-fill glow-orange"></i> Modo Smart TV 📺
+            </a>
           </li>
           <!-- Botón de Audio Sintetizado -->
           <li class="nav-item ms-lg-2 my-2 my-lg-0">
@@ -184,15 +212,18 @@
           </p>
 
           <!-- Botones de Acción Inmediata -->
-          <div class="hero-cta-group justify-content-center justify-content-lg-start">
+          <div class="hero-cta-group justify-content-center justify-content-lg-start flex-wrap">
             <a href="apks/velox_play_movil.apk" class="btn-hero-download" download="velox_play_movil.apk">
               <i class="bi bi-phone"></i> APK Móvil (Android)
             </a>
             <a href="#descargas-tv" class="btn-hero-tv">
-              <i class="bi bi-tv"></i> Nuevos APKs para TV 📺
+              <i class="bi bi-tv"></i> Nuevos APKs TV 📺
+            </a>
+            <a href="tv.html" target="_blank" class="btn-hero-tv" style="background: linear-gradient(135deg, #7b2cbf 0%, #3c096c 100%); border-color: #ff7518; box-shadow: 0 6px 25px rgba(123, 44, 191, 0.6);">
+              <i class="bi bi-browser-chrome text-warning"></i> Modo Navegador TV 🌐
             </a>
             <button class="btn-hero-vip" onclick="openVipWhatsApp('Hero VIP')">
-              <i class="bi bi-shield-fill-check"></i> Pase VIP (Cero Anuncios)
+              <i class="bi bi-shield-fill-check"></i> Pase VIP ($79)
             </button>
           </div>
 
@@ -216,6 +247,11 @@
             </div>
             <div class="floating-showcase-badge badge-bottom-left">
               <i class="bi bi-stars glow-purple"></i> 🚫 VIP Cero Publicidad
+            </div>
+
+            <!-- Mascota Velox Disfrutando Streaming -->
+            <div class="hero-mascot-companion d-none d-md-block" style="position: absolute; bottom: -35px; right: -20px; z-index: 5;">
+              <img src="assets/mascot_velox_popcorn.png" alt="Velox Play Palomitas" class="mascot-section-img mascot-floating-anim" style="width: 135px; height: 135px; object-fit: contain;">
             </div>
           </div>
         </div>
@@ -596,12 +632,19 @@
 
       <!-- TARIFAS Y PAQUETES VIP DETALLADOS (1 MES, 2 MESES, 3 MESES, 4 MESES, 1 AÑO) -->
       <div class="vip-packages-wrapper mt-5 pt-3">
-        <div class="text-center mb-4">
-          <span class="badge rounded-pill px-3 py-2 text-uppercase fw-bold" style="background: rgba(157, 78, 221, 0.2); color: #d8b4fe; border: 1px solid rgba(157,78,221,0.5);">
-            <i class="bi bi-tags-fill me-1"></i> Precios Oficiales de Suscripción VIP
-          </span>
-          <h3 class="text-white fw-bold mt-2 font-display" style="font-family: 'Outfit', sans-serif;">Elige la Duración de tu Cuenta VIP Cero Anuncios</h3>
-          <p class="text-white-50 small mb-0">Activación al instante en WhatsApp • Sin plazos forzosos • Compatible con Celulares y Smart TV</p>
+        <div class="row align-items-center justify-content-center mb-4">
+          <div class="col-md-3 col-sm-4 text-center mb-3 mb-md-0">
+            <div class="mascot-vip-badge-wrapper">
+              <img src="assets/mascot_velox_presenting.png" alt="Velox Presentando VIP" class="mascot-section-img mascot-floating-anim" style="max-height: 200px;">
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-8 text-center text-md-start">
+            <span class="badge rounded-pill px-3 py-2 text-uppercase fw-bold" style="background: rgba(157, 78, 221, 0.2); color: #d8b4fe; border: 1px solid rgba(157,78,221,0.5);">
+              <i class="bi bi-tags-fill me-1"></i> Precios Oficiales de Suscripción VIP
+            </span>
+            <h3 class="text-white fw-bold mt-2 font-display" style="font-family: 'Outfit', sans-serif;">Elige la Duración de tu Cuenta VIP Cero Anuncios</h3>
+            <p class="text-white-50 small mb-0">Activación al instante en WhatsApp • Sin plazos forzosos • Compatible con Celulares y Smart TV</p>
+          </div>
         </div>
 
         <div class="vip-packages-grid">
@@ -692,6 +735,17 @@
         <p class="section-subtitle">
           Archivos APK oficiales listos para instalar. Seguros, optimizados y con soporte multi-arquitectura para Smart TV y Celulares.
         </p>
+      <!-- ASISTENCIA DE VELOX PARA DESCARGAS -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-lg-8">
+          <div class="mascot-download-helper p-3 rounded-4 d-flex align-items-center gap-3">
+            <img src="assets/mascot_velox_helping.png" alt="Velox Ayudando" class="mascot-mini-img mascot-wobble-anim" style="width: 85px; height: 85px; object-fit: contain;">
+            <div>
+              <h5 class="text-white fw-bold mb-1"><i class="bi bi-info-circle-fill text-warning me-1"></i> ¿No sabes cuál APK elegir? ¡Velox te guía!</h5>
+              <p class="text-white-50 small mb-0">Para celulares y tablets usa el <strong>APK Móvil</strong>. Para televisores Smart TV (Android TV, Google TV, Firestick, TV Box) la versión recomendada y más rápida es <strong>Smart TV Universal (ARM32)</strong>.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- DESCARGA PRINCIPAL CELULAR -->
@@ -738,15 +792,109 @@
         </div>
       </div>
 
-      <!-- NUEVAS VERSIONES DE SMART TV (ARM32, ARM64, X86) -->
+      <!-- NUEVAS VERSIONES DE SMART TV (APK & NAVEGADOR WEB) -->
       <div id="descargas-tv" class="pt-3">
         <div class="text-center mb-4">
           <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold text-uppercase fs-6">
             <i class="bi bi-tv-fill"></i> Nuevas Versiones Oficiales para Smart TV
           </span>
-          <h3 class="text-white fw-bold mt-2">Elige la versión adecuada para tu Smart TV o TV Box</h3>
-          <p class="text-white-50">Si tienes dudas sobre cuál descargar, <strong class="text-warning">ARM 32-bit</strong> funciona en más del 95% de Smart TVs y FireSticks.</p>
+          <h3 class="text-white fw-bold mt-2">Elige Cómo Quieres Usar Velox Play en tu Televisor</h3>
+          <p class="text-white-50">Disponible en <strong>APK para Android TV</strong> y en <strong>Versión Web para cualquier Navegador Smart TV</strong> (Samsung, LG, etc.).</p>
         </div>
+
+        <!-- 2 OPCIONES PRINCIPALES: NUEVO APK UNIVERSAL TV & PORTAL NAVEGADOR SMART TV -->
+        <div class="row g-4 justify-content-center mb-4">
+          <!-- 1. NUEVO APK UNIVERSAL VELOX PLAY TV -->
+          <div class="col-lg-6">
+            <div class="apk-card apk-card-tv-recommended" style="border: 2px solid #ff7518;">
+              <div class="recommended-arch-tag">⭐ NUEVO APK UNIVERSAL TV</div>
+              <div class="apk-card-top">
+                <div class="apk-icon-box tv-icon">
+                  <i class="bi bi-tv-fill"></i>
+                </div>
+                <div class="apk-title-info">
+                  <h3>Velox Play TV Oficial</h3>
+                  <span class="arch-pill" style="background: linear-gradient(135deg, #ff7518, #ff4500); color: #fff;">Universal Smart TV & Android TV</span>
+                </div>
+              </div>
+
+              <p class="text-white-50 mb-3">
+                <strong>Nuevo instalador todo-en-uno</strong> para televisores y dispositivos con Android TV, Google TV, Amazon Fire TV Stick, Xiaomi Mi Box y TV Boxes. Compatible con mandos y controles remotos.
+              </p>
+
+              <div class="apk-details-grid">
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Archivo</span>
+                  <span class="apk-detail-val">velox_play_tv.apk</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Tamaño</span>
+                  <span class="apk-detail-val">14.5 MB</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Sistema</span>
+                  <span class="apk-detail-val text-success">Android TV / Google TV</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Control</span>
+                  <span class="apk-detail-val text-info">100% Control Remoto</span>
+                </div>
+              </div>
+
+              <a href="apks/velox_play_tv.apk" class="btn-apk-download btn-tv-download" download="velox_play_tv.apk">
+                <i class="bi bi-cloud-arrow-down-fill"></i> Descargar APK TV Universal (14.5 MB)
+              </a>
+            </div>
+          </div>
+
+          <!-- 2. PORTAL WEB PARA NAVEGADORES SMART TV (SAMSUNG, LG, ROKU, ETC.) -->
+          <div class="col-lg-6">
+            <div class="apk-card" style="border: 2px solid #9d4edd; background: linear-gradient(165deg, rgba(30, 15, 50, 0.9) 0%, rgba(15, 8, 25, 0.95) 100%);">
+              <div class="recommended-arch-tag" style="background: linear-gradient(135deg, #9d4edd, #ff7518);">📺 SIN INSTALAR • NAVEGADOR TV</div>
+              <div class="apk-card-top">
+                <div class="apk-icon-box tv-icon" style="background: linear-gradient(135deg, #9d4edd 0%, #5a189a 100%);">
+                  <i class="bi bi-globe2"></i>
+                </div>
+                <div class="apk-title-info">
+                  <h3>Velox TV en tu Navegador</h3>
+                  <span class="arch-pill" style="background: rgba(157, 78, 221, 0.3); color: #e2b4ff;">Samsung Tizen, LG webOS, Roku & Android</span>
+                </div>
+              </div>
+
+              <p class="text-white-50 mb-3">
+                ¿Tu Smart TV no instala APKs o prefieres ver directo? Abre el <strong>Navegador Web de tu Smart TV</strong> (Samsung Browser, LG webOS Browser, Silk o Chrome) y entra al portal de TV optimizado con D-Pad y flechas de control remoto.
+              </p>
+
+              <div class="apk-details-grid">
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Acceso</span>
+                  <span class="apk-detail-val">Web TV 10-Foot UI</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Compatibilidad</span>
+                  <span class="apk-detail-val text-warning">Cualquier Smart TV</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Navegación</span>
+                  <span class="apk-detail-val text-info">Flechas y OK del Mando</span>
+                </div>
+                <div class="apk-detail-item">
+                  <span class="apk-detail-label">Instalación</span>
+                  <span class="apk-detail-val text-success">Cero Instalación</span>
+                </div>
+              </div>
+
+              <a href="tv.html" target="_blank" class="btn-apk-download" style="background: linear-gradient(135deg, #9d4edd 0%, #ff7518 100%); box-shadow: 0 4px 20px rgba(157, 78, 221, 0.4);">
+                <i class="bi bi-play-circle-fill"></i> Abrir Modo Smart TV Web 📺
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- VERSIONES ESPECÍFICAS DE ARQUITECTURA (ARM32, ARM64, X86) -->
+        <h4 class="text-center text-white-50 fw-bold fs-6 text-uppercase mb-3 mt-4">
+          <i class="bi bi-cpu"></i> Descargas avanzadas por arquitectura de procesador:
+        </h4>
 
         <div class="row g-4 justify-content-center">
 
@@ -991,13 +1139,14 @@
         </div>
 
         <div class="col-lg-3 col-6">
-          <h4 class="footer-links-title">Descargas APK</h4>
+          <h4 class="footer-links-title">Descargas APK & TV</h4>
           <ul class="footer-links-list">
             <li><a href="apks/velox_play_movil.apk" download><i class="bi bi-phone"></i> APK Móvil Android (14.4 MB)</a></li>
-            <li><a href="apks/velox_play_tv_arm32.apk" download><i class="bi bi-tv"></i> APK Smart TV ARM32 (Recomendado)</a></li>
-            <li><a href="apks/velox_play_tv_arm64.apk" download><i class="bi bi-cpu"></i> APK Smart TV ARM64</a></li>
-            <li><a href="apks/velox_play_tv_x86.apk" download><i class="bi bi-display"></i> APK Smart TV x86 (PC)</a></li>
-            <li><a href="#instalacion"><i class="bi bi-book"></i> Guía con app Downloader</a></li>
+            <li><a href="apks/velox_play_tv.apk" download class="text-warning fw-bold"><i class="bi bi-tv-fill"></i> Nuevo APK TV Universal (14.5 MB)</a></li>
+            <li><a href="apks/velox_play_tv_arm32.apk" download><i class="bi bi-tv"></i> APK TV ARM32 (Firestick)</a></li>
+            <li><a href="apks/velox_play_tv_arm64.apk" download><i class="bi bi-cpu"></i> APK TV ARM64 (Gama Alta)</a></li>
+            <li><a href="apks/velox_play_tv_x86.apk" download><i class="bi bi-display"></i> APK TV x86 (Emuladores)</a></li>
+            <li><a href="tv.html" target="_blank" class="text-info fw-bold"><i class="bi bi-browser-chrome"></i> Portal Smart TV (Navegador) 📺</a></li>
           </ul>
         </div>
       </div>

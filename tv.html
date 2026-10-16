@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Velox Play TV 📺 | Portal Web para Navegadores Smart TV & Android TV</title>
+  <meta name="description" content="Versión oficial de Velox Play adaptada para navegadores de Smart TV (Samsung Tizen, LG webOS, Android TV, Fire TV, Roku). Películas, series, animes, doramas y fútbol en vivo con navegación 100% por control remoto.">
+  <meta name="theme-color" content="#ff7518">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo_halloween.png">
+
+  <!-- Google Fonts: Outfit & Creepster -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Estilos dedicados para Smart TV (10-Foot UI) -->
+  <link rel="stylesheet" href="css/tv.css">
+</head>
+<body>
+
+  <!-- Fondo Ambiental Neón -->
+  <div class="tv-ambient-bg" aria-hidden="true"></div>
+
+  <!-- APLICACIÓN PRINCIPAL TV -->
+  <div class="tv-app-wrapper">
+
+    <!-- HEADER SUPERIOR TV -->
+    <header class="tv-header">
+      <div class="tv-brand">
+        <img src="assets/logo_halloween.png" alt="Velox Play TV" class="tv-brand-logo">
+        <div>
+          <span class="tv-brand-title">VELOX PLAY</span>
+          <span class="tv-brand-badge">Smart TV Web 📺</span>
+        </div>
+      </div>
+
+      <div class="tv-header-right">
+        <!-- Estado del Servidor -->
+        <div class="tv-status-badge">
+          <span class="tv-status-dot"></span>
+          <span>4K Ultra HD Online</span>
+        </div>
+
+        <!-- Reloj Digital en Vivo -->
+        <div class="tv-clock">
+          <i class="bi bi-clock"></i>
+          <span id="tvLiveClock">--:--</span>
+        </div>
+
+        <!-- Botón para Volver a la Web Tradicional -->
+        <a href="index.html" class="tv-mode-exit-btn tv-focusable" tabindex="0">
+          <i class="bi bi-laptop"></i> Modo Web Móvil / PC
+        </a>
+      </div>
+    </header>
+
+    <!-- BARRA DE CATEGORÍAS (TABS TV) -->
+    <div class="tv-nav-tabs-wrapper">
+      <nav class="tv-nav-tabs" aria-label="Categorías TV">
+        <button class="tv-tab-btn tv-focusable active" tabindex="0" data-target="tvRowLive">
+          <i class="bi bi-trophy-fill"></i> Fútbol en Vivo
+        </button>
+        <button class="tv-tab-btn tv-focusable" tabindex="0" data-target="tvRowHalloween">
+          <i class="bi bi-moon-stars-fill"></i> Especial Halloween 🎃
+        </button>
+        <button class="tv-tab-btn tv-focusable" tabindex="0" data-target="tvRowMovies">
+          <i class="bi bi-film"></i> Películas 4K
+        </button>
+        <button class="tv-tab-btn tv-focusable" tabindex="0" data-target="tvRowSeries">
+          <i class="bi bi-tv"></i> Series Completas
+        </button>
+        <button class="tv-tab-btn tv-focusable" tabindex="0" data-target="tvRowAnime">
+          <i class="bi bi-fire"></i> Anime & Doramas
+        </button>
+        <button class="tv-tab-btn tv-tab-vip tv-focusable" tabindex="0" onclick="openTvVipModal('Plan VIP TV')">
+          <i class="bi bi-gem"></i> VIP Cero Anuncios ($79)
+        </button>
+        <button class="tv-tab-btn tv-focusable" tabindex="0" data-target="tvRowDownload">
+          <i class="bi bi-download"></i> Descargar APK TV
+        </button>
+      </nav>
+    </div>
+
+    <!-- HERO BILLBOARD (DESTACADO TV DE ALTO IMPACTO) -->
+    <section class="tv-hero-billboard">
+      <img src="assets/halloween_special.webp" alt="Destacado Velox TV" class="tv-hero-bg">
+      <div class="tv-hero-gradient-overlay"></div>
+
+      <div class="tv-hero-content">
+        <div class="tv-hero-tag">
+          <i class="bi bi-broadcast"></i> TRANSMISIÓN DESTACADA DE HOY
+        </div>
+        <h1 class="tv-hero-title">FÚTBOL EN VIVO & MARATÓN HALLOWEEN 4K</h1>
+        
+        <div class="tv-hero-meta">
+          <span class="tv-pill-badge pill-live">🔴 EN VIVO</span>
+          <span class="tv-pill-badge pill-4k">4K ULTRA HD</span>
+          <span class="tv-pill-badge">DOLBY 5.1</span>
+          <span><i class="bi bi-shield-check text-success"></i> Servidores VIP Sin Cortes</span>
+        </div>
+
+        <p class="tv-hero-desc">
+          Disfruta directamente en tu televisor de los partidos de fútbol más esperados, películas de taquilla y el terror de temporada. Compatible con el control remoto de tu Smart TV.
+        </p>
+
+        <div class="tv-hero-actions">
+          <button class="tv-btn-primary tv-focusable" tabindex="0" onclick="openTvPlayer('Fútbol en Directo & Noche de Brujas', 'Canal Oficial Velox 4K', 'assets/halloween_special.webp')">
+            <i class="bi bi-play-circle-fill"></i> Reproducir Ahora
+          </button>
+          
+          <button class="tv-btn-vip-gold tv-focusable" tabindex="0" onclick="openTvVipModal('Hero TV VIP')">
+            <i class="bi bi-qr-code-scan"></i> Activar VIP (Escanear QR)
+          </button>
+
+          <button class="tv-btn-secondary tv-focusable" tabindex="0" onclick="downloadTvApk('velox_play_tv.apk')">
+            <i class="bi bi-cloud-arrow-down-fill"></i> Descargar APK TV (14.5 MB)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILA 1: ⚽ FÚTBOL EN VIVO Y DEPORTES HD -->
+    <section id="tvRowLive" class="tv-row-section">
+      <div class="tv-row-header">
+        <h2 class="tv-row-title"><i class="bi bi-trophy-fill text-warning"></i> ⚽ Fútbol en Vivo & Deportes HD</h2>
+        <span class="tv-pill-badge pill-live">Canales en Directo</span>
+      </div>
+
+      <div class="tv-row-scroller">
+        <!-- Canal 1 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="UEFA Champions League - En Vivo" data-meta="Canal Deportes 4K • Transmisión Oficial">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/soccer_banner.jpg" alt="Champions League" class="tv-card-img">
+            <span class="tv-card-badge badge-live">🔴 LIVE</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Champions League HD</h3>
+            <div class="tv-card-meta">
+              <span>Fútbol Internacional</span>
+              <span class="text-warning">Servidor 1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canal 2 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Liga MX - Partidos de la Jornada" data-meta="Fútbol Mexicano • Audio Español">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/soccer_banner.jpg" alt="Liga MX" class="tv-card-img" style="filter: hue-rotate(45deg);">
+            <span class="tv-card-badge badge-live">🔴 LIVE</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Liga MX en Directo</h3>
+            <div class="tv-card-meta">
+              <span>Primera División</span>
+              <span class="text-warning">Servidor 2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canal 3 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Premier League & LaLiga EA Sports" data-meta="Fútbol Europeo • Full HD 1080p">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/soccer_banner.jpg" alt="Premier League" class="tv-card-img" style="filter: hue-rotate(90deg);">
+            <span class="tv-card-badge badge-live">🔴 LIVE</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Premier League & LaLiga</h3>
+            <div class="tv-card-meta">
+              <span>Inglaterra / España</span>
+              <span class="text-warning">Servidor 3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canal 4 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Deportes 24/7 Premium (ESPN / Fox / TUDN)" data-meta="Señal 24 Horas • Canales Deportivos">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/hero_halloween.jpg" alt="Deportes 24/7" class="tv-card-img">
+            <span class="tv-card-badge">24/7 HD</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Canales Deportivos 24/7</h3>
+            <div class="tv-card-meta">
+              <span>ESPN / Fox / TUDN</span>
+              <span class="text-info">Multi-audio</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canal 5 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Boxeo Internacional & UFC Noche" data-meta="Peleas de Campeonato • Señal Principal">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/soccer_banner.jpg" alt="Boxeo y UFC" class="tv-card-img" style="filter: hue-rotate(180deg);">
+            <span class="tv-card-badge badge-live">🔴 LIVE</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">UFC & Boxeo Estelar</h3>
+            <div class="tv-card-meta">
+              <span>Combate PPV</span>
+              <span class="text-success">VIP Server</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILA 2: 🎃 ESPECIAL HALLOWEEN & TERROR -->
+    <section id="tvRowHalloween" class="tv-row-section">
+      <div class="tv-row-header">
+        <h2 class="tv-row-title"><i class="bi bi-moon-stars-fill text-warning"></i> 🎃 Especial Noche de Brujas & Películas de Miedo</h2>
+        <span class="tv-pill-badge" style="background: rgba(255, 117, 24, 0.2); color: #ff7518;">Temporada 2026</span>
+      </div>
+
+      <div class="tv-row-scroller">
+        <!-- Item 1 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Terrifier 3 - Edición Sin Censura" data-meta="Terror / Gore • 2h 05m • 4K HDR">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/halloween_special.webp" alt="Terrifier 3" class="tv-card-img">
+            <span class="tv-card-badge">4K ULTRA</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Terrifier 3</h3>
+            <div class="tv-card-meta">
+              <span>Terror / Suspenso</span>
+              <span class="text-danger"><i class="bi bi-fire"></i> +18</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Alien: Romulus (2024)" data-meta="Ciencia Ficción / Terror • 1h 59m • Dolby Vision">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/hero_halloween.jpg" alt="Alien Romulus" class="tv-card-img">
+            <span class="tv-card-badge">4K HDR</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Alien: Romulus</h3>
+            <div class="tv-card-meta">
+              <span>Sci-Fi Horror</span>
+              <span>⭐ 8.2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Sonríe 2 (Smile 2)" data-meta="Terror Psicológico • 2h 12m • 1080p Full HD">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/halloween_special.webp" alt="Smile 2" class="tv-card-img" style="filter: hue-rotate(60deg);">
+            <span class="tv-card-badge">ESTRENO</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Sonríe 2</h3>
+            <div class="tv-card-meta">
+              <span>Terror Psicológico</span>
+              <span>⭐ 7.9</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="El Exorcista: Creyentes" data-meta="Sobrenatural • 1h 51m • Audio Latino">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/hero_halloween.jpg" alt="El Exorcista" class="tv-card-img" style="filter: contrast(1.2);">
+            <span class="tv-card-badge">HD</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">El Exorcista: Creyentes</h3>
+            <div class="tv-card-meta">
+              <span>Posesión / Clásico</span>
+              <span>⭐ 7.4</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Beetlejuice Beetlejuice (2024)" data-meta="Comedia / Terror • 1h 45m • 4K Atmos">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/halloween_special.webp" alt="Beetlejuice" class="tv-card-img" style="filter: hue-rotate(120deg);">
+            <span class="tv-card-badge">4K HDR</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Beetlejuice Beetlejuice</h3>
+            <div class="tv-card-meta">
+              <span>Fantasía / Comedia</span>
+              <span class="text-success">⭐ 8.5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILA 3: 🎬 ESTRENOS DE CINE & TAQUILLA 4K -->
+    <section id="tvRowMovies" class="tv-row-section">
+      <div class="tv-row-header">
+        <h2 class="tv-row-title"><i class="bi bi-film text-warning"></i> 🎬 Películas Taquilleras & Estrenos 4K</h2>
+        <span class="tv-pill-badge">Cine en Casa</span>
+      </div>
+
+      <div class="tv-row-scroller">
+        <!-- Película 1 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Deadpool & Wolverine 4K" data-meta="Acción / Comedia • 2h 08m • Calidad IMAX 4K">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/hero_halloween.jpg" alt="Deadpool y Wolverine" class="tv-card-img">
+            <span class="tv-card-badge">IMAX 4K</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Deadpool & Wolverine</h3>
+            <div class="tv-card-meta">
+              <span>Marvel / Acción</span>
+              <span class="text-warning">⭐ 9.1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Película 2 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Intensamente 2 (Inside Out 2)" data-meta="Animación / Familiar • 1h 36m • Español Latino">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/anime_dorama.jpg" alt="Inside Out 2" class="tv-card-img">
+            <span class="tv-card-badge">FAMILIAR</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Intensamente 2</h3>
+            <div class="tv-card-meta">
+              <span>Pixar / Familia</span>
+              <span class="text-warning">⭐ 8.9</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Película 3 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Dune: Parte Dos 4K" data-meta="Sci-Fi Épico • 2h 46m • Sonido Dolby Atmos">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/hero_bg.jpg" alt="Dune 2" class="tv-card-img">
+            <span class="tv-card-badge">4K ULTRA</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Dune: Parte Dos</h3>
+            <div class="tv-card-meta">
+              <span>Ciencia Ficción</span>
+              <span class="text-warning">⭐ 9.3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Película 4 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Furiosa: Saga Mad Max" data-meta="Acción Post-Apocalíptica • 2h 28m • 4K HDR">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/retro_games.jpg" alt="Furiosa" class="tv-card-img">
+            <span class="tv-card-badge">4K HDR</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Furiosa: Mad Max</h3>
+            <div class="tv-card-meta">
+              <span>Acción / Aventura</span>
+              <span>⭐ 8.4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILA 4: 📺 SERIES COMPLETAS & TEMPORADAS -->
+    <section id="tvRowSeries" class="tv-row-section">
+      <div class="tv-row-header">
+        <h2 class="tv-row-title"><i class="bi bi-tv text-warning"></i> 📺 Series Completas & Temporadas</h2>
+        <span class="tv-pill-badge">Maratones HD</span>
+      </div>
+
+      <div class="tv-row-scroller">
+        <!-- Serie 1 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="The Boys - Temporada 4" data-meta="Superhéroes / Acción • Temporada Completa">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/hero_halloween.jpg" alt="The Boys" class="tv-card-img">
+            <span class="tv-card-badge">T4 COMPLETA</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">The Boys</h3>
+            <div class="tv-card-meta">
+              <span>Acción / Sátira</span>
+              <span class="text-warning">⭐ 9.0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Serie 2 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="House of the Dragon - Temporada 2" data-meta="Fantasía Épica / Drama • 4K Dolby Vision">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/halloween_special.webp" alt="House of the Dragon" class="tv-card-img">
+            <span class="tv-card-badge">4K ULTRA</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">House of the Dragon</h3>
+            <div class="tv-card-meta">
+              <span>Fantasía / Dragones</span>
+              <span class="text-warning">⭐ 8.8</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Serie 3 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Sweet Home - Temporada Final" data-meta="Monstruos / Suspenso • 1080p Latino">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/anime_dorama.jpg" alt="Sweet Home" class="tv-card-img">
+            <span class="tv-card-badge">FINAL</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Sweet Home</h3>
+            <div class="tv-card-meta">
+              <span>Terror Coreano</span>
+              <span>⭐ 8.3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILA 5: 🎌 ANIME & DORAMAS POPULARES -->
+    <section id="tvRowAnime" class="tv-row-section">
+      <div class="tv-row-header">
+        <h2 class="tv-row-title"><i class="bi bi-fire text-warning"></i> 🎌 Anime & Doramas de Estreno</h2>
+        <span class="tv-pill-badge">Subtitulado & Doblado</span>
+      </div>
+
+      <div class="tv-row-scroller">
+        <!-- Anime 1 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Demon Slayer: Castillo Infinito" data-meta="Anime Shonen • Calidad 4K • Audio Dual">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/anime_dorama.jpg" alt="Demon Slayer" class="tv-card-img">
+            <span class="tv-card-badge">4K ANIME</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Kimetsu no Yaiba</h3>
+            <div class="tv-card-meta">
+              <span>Castillo Infinito</span>
+              <span class="text-warning">⭐ 9.5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Anime 2 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="Jujutsu Kaisen - Temporada 2" data-meta="Anime / Acción • Shibuya Incident Arc">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/anime_dorama.jpg" alt="Jujutsu Kaisen" class="tv-card-img" style="filter: hue-rotate(90deg);">
+            <span class="tv-card-badge">FULL HD</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">Jujutsu Kaisen</h3>
+            <div class="tv-card-meta">
+              <span>Shibuya Incident</span>
+              <span class="text-warning">⭐ 9.4</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dorama 1 -->
+        <div class="tv-card tv-focusable" tabindex="0" data-title="La Reina de las Lágrimas (Queen of Tears)" data-meta="K-Drama • Temporada Completa • Romance">
+          <div class="tv-card-poster-wrap">
+            <img src="assets/anime_dorama.jpg" alt="Queen of Tears" class="tv-card-img" style="filter: hue-rotate(180deg);">
+            <span class="tv-card-badge">K-DRAMA</span>
+          </div>
+          <div class="tv-card-info">
+            <h3 class="tv-card-title">La Reina de las Lágrimas</h3>
+            <div class="tv-card-meta">
+              <span>Dorama Coreano</span>
+              <span class="text-success">⭐ 9.2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER DE DESCARGA DIRECTA DE APK TV (OFICIAL) -->
+    <section id="tvRowDownload" class="tv-download-banner">
+      <div class="tv-download-info">
+        <span class="tv-pill-badge pill-4k mb-2">⭐ OFICIAL PARA TELEVISORES</span>
+        <h2 class="tv-download-title">Descarga la App de Velox Play en tu Smart TV</h2>
+        <p class="tv-download-desc">
+          Si tu televisión tiene <strong>Android TV, Google TV, Fire TV Stick, Xiaomi Box o TV Box</strong>, descarga directamente el archivo APK para tener la app nativa instalada con máxima fluidez y soporte de control remoto.
+        </p>
+      </div>
+
+      <div class="tv-download-btns">
+        <!-- APK Universal TV -->
+        <button class="tv-btn-primary tv-focusable" tabindex="0" onclick="downloadTvApk('velox_play_tv.apk')">
+          <i class="bi bi-tv-fill"></i> Descargar APK TV Universal (14.5 MB)
+        </button>
+
+        <!-- Versiones avanzadas -->
+        <button class="tv-btn-secondary tv-focusable" tabindex="0" onclick="downloadTvApk('velox_play_tv_arm32.apk')">
+          <i class="bi bi-download"></i> ARM 32-bit (Firestick)
+        </button>
+
+        <button class="tv-btn-secondary tv-focusable" tabindex="0" onclick="downloadTvApk('velox_play_tv_arm64.apk')">
+          <i class="bi bi-cpu"></i> ARM 64-bit (Gama Alta)
+        </button>
+      </div>
+    </section>
+
+  </div> <!-- /tv-app-wrapper -->
+
+  <!-- BARRA INFERIOR DE GUÍA DE CONTROL REMOTO -->
+  <footer class="tv-remote-guide-bar">
+    <div class="tv-guide-keys">
+      <div class="tv-key-item">
+        <span class="tv-key-pill">⬅️ ⬆️ ⬇️ ➡️</span> Navegar
+      </div>
+      <div class="tv-key-item">
+        <span class="tv-key-pill">[OK / Enter]</span> Seleccionar / Ver
+      </div>
+      <div class="tv-key-item">
+        <span class="tv-key-pill">[Atrás / Esc]</span> Cerrar / Volver
+      </div>
+    </div>
+
+    <div>
+      <span class="text-white fw-bold"><i class="bi bi-shield-lock-fill text-warning"></i> Velox Play TV</span> • Conectado a Servidores de Alta Velocidad
+    </div>
+  </footer>
+
+  <!-- MODAL DE REPRODUCTOR FULLSCREEN TV -->
+  <div class="tv-player-modal" id="tvPlayerModal" aria-hidden="true">
+    <div class="tv-player-header">
+      <div class="tv-player-title-info">
+        <h3 id="tvPlayerTitle">Reproduciendo Contenido</h3>
+        <span id="tvPlayerMeta">Señal HD • Transmisión en Vivo</span>
+      </div>
+      <button class="tv-player-close-btn tv-focusable" id="tvPlayerCloseBtn" tabindex="0" onclick="closeAllTvModals()">
+        <i class="bi bi-x-lg"></i> Cerrar Reproductor (Atrás)
+      </button>
+    </div>
+
+    <!-- Pantalla del Reproductor -->
+    <div class="tv-player-screen-mock">
+      <img src="assets/halloween_special.webp" id="tvPlayerMockBg" alt="Transmisión" class="tv-player-mock-bg">
+      <div class="tv-player-buffering-indicator">
+        <div class="tv-player-spinner"></div>
+        <h4 class="text-white fw-bold">Conectando con Servidor Velox TV...</h4>
+        <span class="text-white-50">Buffer de alta velocidad 4K Ultra HD</span>
+      </div>
+    </div>
+
+    <!-- Barra de Controles TV -->
+    <div class="tv-player-controls-bar">
+      <button class="tv-btn-primary tv-focusable" tabindex="0" onclick="showTvToast('Transmisión pausada / reanudada')">
+        <i class="bi bi-play-fill fs-4"></i> Pausar / Play
+      </button>
+
+      <div class="tv-player-progress-wrap">
+        <span class="text-warning fw-bold fs-6">00:42:15</span>
+        <div class="tv-player-progress-bar">
+          <div class="tv-player-progress-fill"></div>
+        </div>
+        <span class="text-white-50 fs-6">02:15:00</span>
+      </div>
+
+      <button class="tv-btn-secondary tv-focusable" tabindex="0" onclick="showTvToast('Servidor cambiado a Ultra HD VIP')">
+        <i class="bi bi-hdd-network"></i> Servidor VIP 4K
+      </button>
+
+      <button class="tv-btn-secondary tv-focusable" tabindex="0" onclick="showTvToast('Audio establecido en Español Latino 5.1')">
+        <i class="bi bi-volume-up-fill"></i> Español Latino 5.1
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL QR PARA ACTIVAR VIP DESDE EL CELULAR -->
+  <div class="tv-qr-modal" id="tvQrModal" aria-hidden="true">
+    <div class="tv-qr-box">
+      <div class="d-flex justify-content-between align-items-center w-100 mb-3">
+        <span class="tv-pill-badge pill-4k">⭐ ACTIVACIÓN VIP PARA TELEVISOR</span>
+        <button class="tv-player-close-btn tv-focusable" id="tvQrCloseBtn" tabindex="0" onclick="closeAllTvModals()">
+          <i class="bi bi-x-lg"></i> Cerrar
+        </button>
+      </div>
+
+      <h2 class="text-white fw-bold fs-2">Escanea con tu Celular para Activar VIP</h2>
+      <p class="text-white-50 fs-5 mb-2">
+        Apunta la cámara de tu teléfono al código QR para chatear directamente en WhatsApp y activar tu cuenta <strong>Cero Anuncios</strong> sin necesidad de escribir en la televisión.
+      </p>
+
+      <!-- Código QR Dinámico -->
+      <img id="tvQrCodeImg" src="" alt="Código QR WhatsApp VIP" class="tv-qr-code-img">
+
+      <div class="d-flex gap-3 justify-content-center flex-wrap mt-2">
+        <span class="badge bg-success p-2 fs-6">1 Mes: $79 MXN</span>
+        <span class="badge bg-primary p-2 fs-6">2 Meses: $139 MXN</span>
+        <span class="badge bg-warning text-dark p-2 fs-6">3 Meses: $189 MXN ⭐</span>
+        <span class="badge bg-info text-dark p-2 fs-6">4 Meses: $239 MXN</span>
+        <span class="badge bg-danger p-2 fs-6">1 Año: $500 MXN 🔥</span>
+      </div>
+
+      <div class="mt-4">
+        <a id="tvWhatsappDirectBtn" href="#" target="_blank" class="tv-btn-primary tv-focusable" tabindex="0">
+          <i class="bi bi-whatsapp"></i> O Haz Clic Aquí Si Tu TV Admite WhatsApp Web
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript del Motor de Navegación TV -->
+  <script src="js/tv.js"></script>
+</body>
+</html>

@@ -37,6 +37,61 @@ function openVipWhatsApp(planName = 'Pase VIP', price = null) {
 window.openVipWhatsApp = openVipWhatsApp;
 
 // ===================================================================
+// SISTEMA INTERACTIVO DE LA MASCOTA OFICIAL "VELOX" (CAMBIO DE POSES)
+// ===================================================================
+const VELOX_POSES = [
+  {
+    img: 'assets/mascot_velox_waving.png',
+    text: '¡Hola! Soy Velox 🦊⚡ Bienvenido a la mejor app de streaming.',
+    sound: 520
+  },
+  {
+    img: 'assets/mascot_velox_helping.png',
+    text: '¿Necesitas ayuda con los APKs? ¡Smart TV y Celular listos! 📲📺',
+    sound: 580
+  },
+  {
+    img: 'assets/mascot_velox_presenting.png',
+    text: '¡Pase VIP Cero Anuncios desde $79! Activación inmediata ⭐',
+    sound: 660
+  },
+  {
+    img: 'assets/mascot_velox_popcorn.png',
+    text: '¡Prepara las palomitas! Pelis, series y fútbol en vivo 🍿🔥',
+    sound: 440
+  }
+];
+
+let currentPoseIndex = 0;
+
+function interactVeloxMascot() {
+  currentPoseIndex = (currentPoseIndex + 1) % VELOX_POSES.length;
+  const current = VELOX_POSES[currentPoseIndex];
+  
+  const imgEl = document.getElementById('veloxMascotImg');
+  const bubbleEl = document.getElementById('veloxBubble');
+  
+  if (imgEl) {
+    imgEl.style.transform = 'scale(0.85) rotate(8deg)';
+    setTimeout(() => {
+      imgEl.src = current.img;
+      imgEl.style.transform = '';
+    }, 120);
+  }
+  
+  if (bubbleEl) {
+    bubbleEl.innerHTML = current.text;
+    bubbleEl.classList.remove('animate__pulse');
+    void bubbleEl.offsetWidth; // reflow
+    bubbleEl.classList.add('animate__pulse');
+  }
+  
+  playSpookyTone(current.sound, 'triangle', 0.22);
+}
+
+window.interactVeloxMascot = interactVeloxMascot;
+
+// ===================================================================
 // SISTEMA DE AUDIO SPOOKY (WEB AUDIO API - SIN DEPENDENCIAS EXTERNAS)
 // ===================================================================
 let audioCtx = null;
