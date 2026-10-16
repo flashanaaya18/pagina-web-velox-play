@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Motores de búsqueda principales
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap oficial para indexación rápida en Google
+Sitemap: https://flashanaaya18.github.io/pagina-web-velox-play/sitemap.xml

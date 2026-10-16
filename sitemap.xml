@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Página Principal Oficial (Móvil y PC) -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/assets/hero_halloween.jpg</image:loc>
+      <image:title>Velox Play Streaming</image:title>
+      <image:caption>Descargar Velox Play para Celular y Smart TV</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Portal Oficial Smart TV & Android TV (10-Foot UI) -->
+  <url>
+    <loc>https://flashanaaya18.github.io/pagina-web-velox-play/tv.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://flashanaaya18.github.io/pagina-web-velox-play/assets/halloween_special.webp</image:loc>
+      <image:title>Velox Play Smart TV Web</image:title>
+      <image:caption>Portal Web para Navegadores de Smart TV Samsung, LG y Android TV</image:caption>
+    </image:image>
+  </url>
+
+</urlset>
