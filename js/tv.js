@@ -1,17 +1,34 @@
 /**
- * VELOX PLAY TV - CONTROL REMOTO D-PAD & MOTOR DE NAVEGACIÓN PARA SMART TV
- * Diseñado para navegadores de Smart TV (Samsung Tizen, LG webOS, Android TV, Fire TV, etc.)
+ * VELOX PLAY TV - CONTROL REMOTO D-PAD & MOTOR DE NAVEGACIÓN UNIVERSAL PARA SMART TV
+ * Diseñado y optimizado para:
+ * - Android TV / Google TV / Fire TV Stick (D-Pad keyCodes: 19, 20, 21, 22, OK: 23, 66, Back: 4)
+ * - Samsung Smart TV (Tizen OS) (Arrows: 37-40, OK: 13, 29443, Back: 10009)
+ * - LG Smart TV (webOS) (Arrows: 37-40, OK: 13, Back: 461, Magic Remote pointer)
+ * - Navegadores TV genéricos (Silk, Opera TV/Vewd, Odin, Puffin, TV Bro)
  */
 
 // Token WhatsApp VIP protegido
 const _0x_v = "NTI1NjE2ODQwNTI0";
 
+let currentFocusedEl = null;
+let tvAudioCtx = null;
+
+// Registro preventivo de teclas en Samsung Tizen
+if (typeof window !== 'undefined' && window.tizen && window.tizen.tvinputdevice) {
+  try {
+    ['MediaPlay', 'MediaPause', 'MediaPlayPause', 'MediaStop', 'Return', 'Exit'].forEach(k => {
+      try { window.tizen.tvinputdevice.registerKey(k); } catch (e) {}
+    });
+  } catch (e) {}
+}
+
+// Inicialización al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
   initTvClock();
-  initSpatialNavigation();
   initTvAudio();
   initTvTabs();
   initTvModals();
+  initSpatialNavigation();
 });
 
 // ===================================================================
@@ -34,144 +51,406 @@ function initTvClock() {
 // ===================================================================
 // SISTEMA DE AUDIO PARA CONTROL REMOTO (WEB AUDIO API)
 // ===================================================================
-let tvAudioCtx = null;
-
 function initTvAudio() {
-  // Inicialización bajo demanda tras la primera interacción
   const enableAudio = () => {
     if (!tvAudioCtx) {
-      tvAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      try {
+        tvAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      } catch (e) {}
     }
   };
   window.addEventListener('keydown', enableAudio, { once: true });
   window.addEventListener('click', enableAudio, { once: true });
 }
 
-function playTvSound(freq = 420, type = 'sine', duration = 0.08) {
+function playTvSound(freq = 460, type = 'sine', duration = 0.07) {
   if (!tvAudioCtx) return;
   try {
+    if (tvAudioCtx.state === 'suspended') {
+      tvAudioCtx.resume();
+    }
     const osc = tvAudioCtx.createOscillator();
     const gain = tvAudioCtx.createGain();
     osc.type = type;
     osc.frequency.setValueAtTime(freq, tvAudioCtx.currentTime);
-    gain.gain.setValueAtTime(0.08, tvAudioCtx.currentTime);
+    gain.gain.setValueAtTime(0.06, tvAudioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, tvAudioCtx.currentTime + duration);
     osc.connect(gain);
     gain.connect(tvAudioCtx.destination);
     osc.start();
     osc.stop(tvAudioCtx.currentTime + duration);
-  } catch (e) {
-    // Silencioso si el navegador restringe audio
-  }
+  } catch (e) {}
 }
 
 // ===================================================================
-// MOTOR DE NAVEGACIÓN ESPACIAL D-PAD (FLECHAS, OK, ATRÁS DE CONTROL REMOTO)
+// MOTOR DE NAVEGACIÓN UNIVERSAL D-PAD PARA CONTROL REMOTO DE TV
 // ===================================================================
-let currentFocusedEl = null;
-
 function initSpatialNavigation() {
-  // Encontrar todos los elementos enfocables
-  const focusables = Array.from(document.querySelectorAll('.tv-focusable'));
-  if (focusables.length === 0) return;
 
-  // Asignar primer elemento enfocado
-  setTvFocus(focusables[0]);
+  // Detectores normalizados para teclas de control remoto
+  function isUp(e) {
+    return e.key === 'ArrowUp' || e.key === 'Up' || e.keyCode === 38 || e.keyCode === 19;
+  }
+  function isDown(e) {
+    return e.key === 'ArrowDown' || e.key === 'Down' || e.keyCode === 40 || e.keyCode === 20;
+  }
+  function isLeft(e) {
+    return e.key === 'ArrowLeft' || e.key === 'Left' || e.keyCode === 37 || e.keyCode === 21;
+  }
+  function isRight(e) {
+    return e.key === 'ArrowRight' || e.key === 'Right' || e.keyCode === 39 || e.keyCode === 22;
+  }
+  function isEnter(e) {
+    return e.key === 'Enter' || e.key === 'Select' || e.key === 'Accept' || e.key === ' ' ||
+           e.keyCode === 13 || e.keyCode === 23 || e.keyCode === 66 || e.keyCode === 29443 || e.keyCode === 32;
+  }
+  function isBack(e) {
+    return e.key === 'Escape' || e.key === 'Backspace' || e.key === 'GoBack' || e.key === 'Back' ||
+           e.keyCode === 27 || e.keyCode === 8 || e.keyCode === 4 || e.keyCode === 10009 || e.keyCode === 461;
+  }
 
-  // Listener de teclado / control remoto de Smart TV
+  // Establecer foco inicial en el botón principal de la portada (Hero Play)
+  function setInitialFocus() {
+    if (currentFocusedEl && document.body.contains(currentFocusedEl)) return;
+    const defaultTarget = document.querySelector('.tv-hero-actions .tv-btn-primary') ||
+                          document.querySelector('.tv-tab-btn.active') ||
+                          document.querySelector('.tv-focusable');
+    if (defaultTarget) {
+      setTvFocus(defaultTarget, false);
+    }
+  }
+
+  // Ejecutar establecimiento de foco inicial con reintentos
+  setInitialFocus();
+  setTimeout(setInitialFocus, 100);
+  setTimeout(setInitialFocus, 300);
+  setTimeout(setInitialFocus, 700);
+
+  // Sincronizar automáticamente con el motor nativo de la Smart TV (focusin)
+  document.addEventListener('focusin', (e) => {
+    const target = e.target.closest('.tv-focusable');
+    if (target && target !== currentFocusedEl) {
+      setTvFocus(target, true, false);
+    }
+  });
+
+  // Soporte para puntero/ratón (LG Magic Remote o mouse de Smart TV)
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('.tv-focusable');
+    if (target && target !== currentFocusedEl) {
+      setTvFocus(target, false, true);
+    }
+  });
+
+  // Capturador principal de eventos del control remoto (Capture phase = true)
   window.addEventListener('keydown', (e) => {
-    // Teclas estándar y códigos de control remoto de Samsung/LG/Android TV
-    const key = e.key;
-    const keyCode = e.keyCode;
+    // Si no hay elemento enfocado, recuperar inmediatamente
+    if (!currentFocusedEl || !document.body.contains(currentFocusedEl)) {
+      setInitialFocus();
+    }
 
-    // Verificar si modal de reproductor está abierto
     const playerModal = document.getElementById('tvPlayerModal');
     const qrModal = document.getElementById('tvQrModal');
     const isModalOpen = (playerModal && playerModal.classList.contains('active')) || 
                         (qrModal && qrModal.classList.contains('active'));
 
-    // Tecla ATRÁS / BACK (Escape, Backspace, Android Back keyCode 4, Samsung 10009)
-    if (key === 'Escape' || key === 'Backspace' || keyCode === 4 || keyCode === 10009 || keyCode === 27) {
+    // TECLA ATRÁS / BACK DEL CONTROL REMOTO
+    if (isBack(e)) {
       if (isModalOpen) {
         e.preventDefault();
+        e.stopPropagation();
         closeAllTvModals();
-        playTvSound(300, 'triangle', 0.12);
+        playTvSound(320, 'triangle', 0.12);
         return;
       }
     }
 
-    // Teclas direccionales
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key) || 
-        [38, 40, 37, 39].includes(keyCode)) {
+    // TECLAS DIRECCIONALES (ARRIBA, ABAJO, IZQUIERDA, DERECHA)
+    if (isUp(e) || isDown(e) || isLeft(e) || isRight(e)) {
       e.preventDefault();
-      let direction = '';
-      if (key === 'ArrowUp' || keyCode === 38) direction = 'up';
-      if (key === 'ArrowDown' || keyCode === 40) direction = 'down';
-      if (key === 'ArrowLeft' || keyCode === 37) direction = 'left';
-      if (key === 'ArrowRight' || keyCode === 39) direction = 'right';
+      e.stopPropagation();
 
-      navigateSpatial(direction);
+      let dir = '';
+      if (isUp(e)) dir = 'up';
+      else if (isDown(e)) dir = 'down';
+      else if (isLeft(e)) dir = 'left';
+      else if (isRight(e)) dir = 'right';
+
+      navigateTv(dir);
       playTvSound(520, 'sine', 0.05);
       return;
     }
 
-    // Tecla OK / ENTER (Enter, Space, keyCode 13, Samsung Enter 29443)
-    if (key === 'Enter' || key === ' ' || keyCode === 13 || keyCode === 29443) {
+    // TECLA OK / ENTER / SELECCIONAR
+    if (isEnter(e)) {
       if (currentFocusedEl) {
         e.preventDefault();
-        playTvSound(740, 'triangle', 0.15);
+        e.stopPropagation();
+        playTvSound(740, 'triangle', 0.14);
         currentFocusedEl.click();
       }
     }
-  });
-
-  // Soporte para puntero/ratón (LG Magic Remote o mouse de Smart TV)
-  focusables.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      setTvFocus(el, false);
-    });
-  });
+  }, true);
 }
 
-function setTvFocus(element, shouldScroll = true) {
+// ===================================================================
+// GESTOR DE FOCO Y DESPLAZAMIENTO VISUAL
+// ===================================================================
+function setTvFocus(element, shouldScroll = true, doNativeFocus = true) {
   if (!element) return;
-  if (currentFocusedEl) {
+
+  if (currentFocusedEl && currentFocusedEl !== element) {
     currentFocusedEl.classList.remove('tv-focused');
   }
+
   currentFocusedEl = element;
   currentFocusedEl.classList.add('tv-focused');
-  currentFocusedEl.focus();
+
+  if (doNativeFocus && document.activeElement !== element) {
+    try {
+      element.focus({ preventScroll: true });
+    } catch (e) {
+      element.focus();
+    }
+  }
 
   if (shouldScroll) {
-    // Si está dentro de una fila con scroll horizontal
-    const scroller = currentFocusedEl.closest('.tv-row-scroller');
+    // Scroll horizontal si el elemento está en una fila o barra scrolleable
+    const scroller = element.closest('.tv-row-scroller, .tv-nav-tabs-wrapper');
     if (scroller) {
-      const cardRect = currentFocusedEl.getBoundingClientRect();
+      const cardRect = element.getBoundingClientRect();
       const scrollerRect = scroller.getBoundingClientRect();
       const scrollOffset = (cardRect.left - scrollerRect.left) - (scrollerRect.width / 2) + (cardRect.width / 2);
       scroller.scrollBy({ left: scrollOffset, behavior: 'smooth' });
     }
 
-    // Mantener la fila visible verticalmente en la pantalla
-    currentFocusedEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    // Scroll vertical suave para mantener el elemento enfocado centrado en la pantalla
+    const rect = element.getBoundingClientRect();
+    const winHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < 90 || rect.bottom > winHeight - 90) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+    }
   }
 }
 
-function navigateSpatial(direction) {
+// ===================================================================
+// MOTOR INTELIGENTE DE NAVEGACIÓN CONTEXTUAL Y ESPACIAL
+// ===================================================================
+function navigateTv(direction) {
   if (!currentFocusedEl) {
-    const first = document.querySelector('.tv-focusable');
+    const first = document.querySelector('.tv-hero-actions .tv-btn-primary') || document.querySelector('.tv-focusable');
     if (first) setTvFocus(first);
     return;
   }
 
-  // Filtrar elementos enfocables visibles en pantalla (o dentro del modal activo si hay uno)
-  const isModalActive = document.querySelector('.tv-player-modal.active, .tv-qr-modal.active');
-  let candidates;
-  if (isModalActive) {
-    candidates = Array.from(isModalActive.querySelectorAll('.tv-focusable'));
-  } else {
-    candidates = Array.from(document.querySelectorAll('.tv-app-wrapper .tv-focusable'));
+  // 1. SI UN MODAL ESTÁ ABIERTO (Player o QR), NAVEGAR SOLO DENTRO DEL MODAL
+  const activeModal = document.querySelector('.tv-player-modal.active, .tv-qr-modal.active');
+  if (activeModal) {
+    navigateInsideModal(activeModal, direction);
+    return;
   }
+
+  // 2. CONTEXTO A: DENTRO DE UNA FILA DE CONTENIDO (tv-row-scroller)
+  const scroller = currentFocusedEl.closest('.tv-row-scroller');
+  if (scroller) {
+    if (direction === 'right') {
+      const nextCard = currentFocusedEl.nextElementSibling;
+      if (nextCard && nextCard.classList.contains('tv-focusable')) {
+        setTvFocus(nextCard);
+        return;
+      }
+    } else if (direction === 'left') {
+      const prevCard = currentFocusedEl.previousElementSibling;
+      if (prevCard && prevCard.classList.contains('tv-focusable')) {
+        setTvFocus(prevCard);
+        return;
+      }
+    } else if (direction === 'down') {
+      // Ir a la siguiente fila de contenido
+      const currentSection = currentFocusedEl.closest('.tv-row-section');
+      const allSections = Array.from(document.querySelectorAll('.tv-row-section'));
+      const currentIndex = allSections.indexOf(currentSection);
+
+      if (currentIndex >= 0 && currentIndex < allSections.length - 1) {
+        const nextSection = allSections[currentIndex + 1];
+        focusClosestCardInRow(nextSection, currentFocusedEl);
+        return;
+      } else {
+        // Si es la última fila, saltar al banner de descarga de APK
+        const dlBtn = document.querySelector('#tvRowDownload .tv-download-btns .tv-btn-primary');
+        if (dlBtn) {
+          setTvFocus(dlBtn);
+          return;
+        }
+      }
+    } else if (direction === 'up') {
+      // Ir a la fila anterior o subir al Hero Billboard
+      const currentSection = currentFocusedEl.closest('.tv-row-section');
+      const allSections = Array.from(document.querySelectorAll('.tv-row-section'));
+      const currentIndex = allSections.indexOf(currentSection);
+
+      if (currentIndex > 0) {
+        const prevSection = allSections[currentIndex - 1];
+        focusClosestCardInRow(prevSection, currentFocusedEl);
+        return;
+      } else {
+        // Es la primera fila: subir a las acciones del Hero
+        const heroBtn = document.querySelector('.tv-hero-actions .tv-btn-primary');
+        if (heroBtn) {
+          setTvFocus(heroBtn);
+          return;
+        }
+      }
+    }
+  }
+
+  // 3. CONTEXTO B: ACCIONES DEL HERO BILLBOARD
+  const heroActions = currentFocusedEl.closest('.tv-hero-actions');
+  if (heroActions) {
+    const buttons = Array.from(heroActions.querySelectorAll('.tv-focusable'));
+    const btnIndex = buttons.indexOf(currentFocusedEl);
+
+    if (direction === 'right' && btnIndex < buttons.length - 1) {
+      setTvFocus(buttons[btnIndex + 1]);
+      return;
+    } else if (direction === 'left' && btnIndex > 0) {
+      setTvFocus(buttons[btnIndex - 1]);
+      return;
+    } else if (direction === 'down') {
+      // Bajar a la primera tarjeta de la primera fila
+      const firstCard = document.querySelector('#tvRowLive .tv-card');
+      if (firstCard) {
+        setTvFocus(firstCard);
+        return;
+      }
+    } else if (direction === 'up') {
+      // Subir a la pestaña de categorías activa
+      const activeTab = document.querySelector('.tv-nav-tabs .tv-tab-btn.active') || document.querySelector('.tv-nav-tabs .tv-tab-btn');
+      if (activeTab) {
+        setTvFocus(activeTab);
+        return;
+      }
+    }
+  }
+
+  // 4. CONTEXTO C: PESTAÑAS DE CATEGORÍAS (TABS)
+  const tabsContainer = currentFocusedEl.closest('.tv-nav-tabs');
+  if (tabsContainer) {
+    const tabs = Array.from(tabsContainer.querySelectorAll('.tv-tab-btn'));
+    const tabIndex = tabs.indexOf(currentFocusedEl);
+
+    if (direction === 'right' && tabIndex < tabs.length - 1) {
+      setTvFocus(tabs[tabIndex + 1]);
+      return;
+    } else if (direction === 'left' && tabIndex > 0) {
+      setTvFocus(tabs[tabIndex - 1]);
+      return;
+    } else if (direction === 'down') {
+      // Bajar a la acción principal del Hero
+      const heroBtn = document.querySelector('.tv-hero-actions .tv-btn-primary');
+      if (heroBtn) {
+        setTvFocus(heroBtn);
+        return;
+      }
+    } else if (direction === 'up') {
+      // Subir al botón del Header (Modo PC / Móvil)
+      const headerBtn = document.querySelector('.tv-header .tv-mode-exit-btn');
+      if (headerBtn) {
+        setTvFocus(headerBtn);
+        return;
+      }
+    }
+  }
+
+  // 5. CONTEXTO D: HEADER SUPERIOR
+  const header = currentFocusedEl.closest('.tv-header');
+  if (header) {
+    if (direction === 'down') {
+      const activeTab = document.querySelector('.tv-nav-tabs .tv-tab-btn.active') || document.querySelector('.tv-nav-tabs .tv-tab-btn');
+      if (activeTab) {
+        setTvFocus(activeTab);
+        return;
+      }
+    }
+  }
+
+  // 6. CONTEXTO E: BANNER DE DESCARGA DE APK (tvRowDownload)
+  const downloadSection = currentFocusedEl.closest('#tvRowDownload');
+  if (downloadSection) {
+    const dlBtns = Array.from(downloadSection.querySelectorAll('.tv-focusable'));
+    const dlIndex = dlBtns.indexOf(currentFocusedEl);
+
+    if (direction === 'right' && dlIndex < dlBtns.length - 1) {
+      setTvFocus(dlBtns[dlIndex + 1]);
+      return;
+    } else if (direction === 'left' && dlIndex > 0) {
+      setTvFocus(dlBtns[dlIndex - 1]);
+      return;
+    } else if (direction === 'up') {
+      // Subir a la última fila de contenido (Anime & Doramas)
+      const lastSection = document.querySelector('#tvRowAnime');
+      if (lastSection) {
+        focusClosestCardInRow(lastSection, currentFocusedEl);
+        return;
+      }
+    }
+  }
+
+  // 7. FALLBACK: NAVEGACIÓN ESPACIAL GEOMÉTRICA (2D EUCLIDIANA)
+  navigateGeometric(direction);
+}
+
+// Navegar dentro de un modal abierto (Player o QR)
+function navigateInsideModal(modal, direction) {
+  const focusables = Array.from(modal.querySelectorAll('.tv-focusable')).filter(el => {
+    const rect = el.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0;
+  });
+  if (focusables.length === 0) return;
+
+  const currentIndex = focusables.indexOf(currentFocusedEl);
+  if (direction === 'right' || direction === 'down') {
+    const next = focusables[(currentIndex + 1) % focusables.length];
+    setTvFocus(next);
+  } else if (direction === 'left' || direction === 'up') {
+    const prev = focusables[(currentIndex - 1 + focusables.length) % focusables.length];
+    setTvFocus(prev);
+  }
+}
+
+// Encontrar la tarjeta en una fila cuya coordenada X coincida mejor con el elemento actual
+function focusClosestCardInRow(section, sourceElement) {
+  const cards = Array.from(section.querySelectorAll('.tv-card'));
+  if (cards.length === 0) return;
+
+  const srcRect = sourceElement.getBoundingClientRect();
+  const srcCenterX = srcRect.left + srcRect.width / 2;
+
+  let bestCard = cards[0];
+  let minDiff = Infinity;
+
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const diff = Math.abs(centerX - srcCenterX);
+    if (diff < minDiff) {
+      minDiff = diff;
+      bestCard = card;
+    }
+  });
+
+  setTvFocus(bestCard);
+}
+
+// Algoritmo espacial general cuando no hay relación contextual directa
+function navigateGeometric(direction) {
+  const candidates = Array.from(document.querySelectorAll('.tv-app-wrapper .tv-focusable')).filter(el => {
+    if (el === currentFocusedEl) return false;
+    const rect = el.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0 && window.getComputedStyle(el).visibility !== 'hidden';
+  });
+
+  if (candidates.length === 0) return;
 
   const currentRect = currentFocusedEl.getBoundingClientRect();
   const currentCenter = {
@@ -183,7 +462,6 @@ function navigateSpatial(direction) {
   let bestScore = Infinity;
 
   candidates.forEach(candidate => {
-    if (candidate === currentFocusedEl) return;
     const rect = candidate.getBoundingClientRect();
     const center = {
       x: rect.left + rect.width / 2,
@@ -199,30 +477,29 @@ function navigateSpatial(direction) {
 
     switch (direction) {
       case 'left':
-        isDirectionValid = dx < -10;
+        isDirectionValid = dx < -15;
         primaryDist = Math.abs(dx);
         secondaryDist = Math.abs(dy);
         break;
       case 'right':
-        isDirectionValid = dx > 10;
+        isDirectionValid = dx > 15;
         primaryDist = Math.abs(dx);
         secondaryDist = Math.abs(dy);
         break;
       case 'up':
-        isDirectionValid = dy < -10;
+        isDirectionValid = dy < -15;
         primaryDist = Math.abs(dy);
         secondaryDist = Math.abs(dx);
         break;
       case 'down':
-        isDirectionValid = dy > 10;
+        isDirectionValid = dy > 15;
         primaryDist = Math.abs(dy);
         secondaryDist = Math.abs(dx);
         break;
     }
 
     if (isDirectionValid) {
-      // Ponderación de distancia: penalizar desviaciones ortogonales
-      const score = primaryDist + (secondaryDist * 2.5);
+      const score = primaryDist + (secondaryDist * 2.2);
       if (score < bestScore) {
         bestScore = score;
         bestCandidate = candidate;
@@ -252,7 +529,7 @@ function initTvTabs() {
           targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           const firstCard = targetSection.querySelector('.tv-focusable');
           if (firstCard) {
-            setTimeout(() => setTvFocus(firstCard), 300);
+            setTimeout(() => setTvFocus(firstCard), 350);
           }
         }
       }
@@ -264,7 +541,6 @@ function initTvTabs() {
 // REPRODUCTOR STREAMING MODAL EN SMART TV
 // ===================================================================
 function initTvModals() {
-  // Manejadores para abrir player al presionar tarjetas
   const cards = document.querySelectorAll('.tv-card');
   cards.forEach(card => {
     card.addEventListener('click', () => {
@@ -285,15 +561,27 @@ function openTvPlayer(title, meta, posterSrc) {
   document.getElementById('tvPlayerMockBg').src = posterSrc;
 
   modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+
   const closeBtn = document.getElementById('tvPlayerCloseBtn');
-  if (closeBtn) setTvFocus(closeBtn);
+  if (closeBtn) {
+    setTimeout(() => setTvFocus(closeBtn), 150);
+  }
 }
 
+window.openTvPlayer = openTvPlayer;
+
 function closeAllTvModals() {
-  document.querySelectorAll('.tv-player-modal, .tv-qr-modal').forEach(m => m.classList.remove('active'));
-  // Devolver el foco a un elemento de la vista principal
-  const heroBtn = document.querySelector('.tv-hero-actions .tv-focusable') || document.querySelector('.tv-focusable');
-  if (heroBtn) setTvFocus(heroBtn);
+  document.querySelectorAll('.tv-player-modal, .tv-qr-modal').forEach(m => {
+    m.classList.remove('active');
+    m.setAttribute('aria-hidden', 'true');
+  });
+
+  // Devolver el foco a la portada o botón activo
+  const heroBtn = document.querySelector('.tv-hero-actions .tv-btn-primary') || document.querySelector('.tv-focusable');
+  if (heroBtn) {
+    setTimeout(() => setTvFocus(heroBtn), 150);
+  }
 }
 
 window.closeAllTvModals = closeAllTvModals;
@@ -309,21 +597,23 @@ function openTvVipModal(planName = 'Pase VIP TV') {
   const msg = `📺 ¡Hola Velox Play! Estoy en mi Smart TV y quiero activar mi cuenta VIP (${planName}). ¿Me comparten los datos de transferencia para activación inmediata? ⭐`;
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
 
-  // Actualizar enlace directo
   const directLink = document.getElementById('tvWhatsappDirectBtn');
   if (directLink) {
     directLink.href = whatsappUrl;
   }
 
-  // Generar URL para código QR de alta resolución
   const qrImg = document.getElementById('tvQrCodeImg');
   if (qrImg) {
     qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(whatsappUrl)}&color=090511&bgcolor=ffffff`;
   }
 
   modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+
   const qrCloseBtn = document.getElementById('tvQrCloseBtn');
-  if (qrCloseBtn) setTvFocus(qrCloseBtn);
+  if (qrCloseBtn) {
+    setTimeout(() => setTvFocus(qrCloseBtn), 150);
+  }
 }
 
 window.openTvVipModal = openTvVipModal;
@@ -333,12 +623,25 @@ window.openTvVipModal = openTvVipModal;
 // ===================================================================
 function downloadTvApk(apkName = 'velox_play_tv.apk') {
   playTvSound(880, 'triangle', 0.2);
+
+  // Soporte directo para navegadores de TV
   const downloadLink = document.createElement('a');
   downloadLink.href = `apks/${apkName}`;
-  downloadLink.download = apkName;
+  downloadLink.setAttribute('download', apkName);
+  downloadLink.target = '_blank';
   document.body.appendChild(downloadLink);
   downloadLink.click();
-  document.body.removeChild(downloadLink);
+
+  setTimeout(() => {
+    if (downloadLink.parentNode) {
+      downloadLink.parentNode.removeChild(downloadLink);
+    }
+  }, 400);
+
+  // Fallback directo por si el navegador bloquea la creación dinámica
+  setTimeout(() => {
+    window.location.href = `apks/${apkName}`;
+  }, 100);
 
   // Notificación en pantalla
   showTvToast(`Iniciando descarga de ${apkName}... Abre tu instalador en Android TV.`);
@@ -359,12 +662,13 @@ function showTvToast(msg) {
       background: linear-gradient(135deg, #ff7518, #9d4edd);
       color: #fff;
       font-weight: 800;
-      font-size: 1.1rem;
-      padding: 14px 28px;
+      font-size: 1.15rem;
+      padding: 16px 32px;
       border-radius: 20px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.8), 0 0 25px rgba(255, 117, 24, 0.6);
-      z-index: 2000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.85), 0 0 25px rgba(255, 117, 24, 0.6);
+      z-index: 3000;
       transition: opacity 0.3s ease;
+      pointer-events: none;
     `;
     document.body.appendChild(toast);
   }
@@ -374,3 +678,5 @@ function showTvToast(msg) {
     toast.style.opacity = '0';
   }, 3500);
 }
+
+window.showTvToast = showTvToast;

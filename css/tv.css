@@ -86,11 +86,12 @@ html, body {
 
 .tv-focusable:focus,
 .tv-focusable.tv-focused {
-  outline: none;
+  outline: 4px solid var(--tv-orange) !important;
+  outline-offset: 4px !important;
   transform: scale(1.08) !important;
-  box-shadow: var(--tv-focus-glow) !important;
+  box-shadow: 0 0 35px rgba(255, 117, 24, 0.85), 0 0 15px #ff7518 !important;
   border-color: var(--tv-orange) !important;
-  z-index: 20;
+  z-index: 25;
 }
 
 /* ===================================================================
@@ -447,15 +448,26 @@ html, body {
   display: none;
 }
 
-/* TARJETA DE CONTENIDO TV */
-.tv-card {
+/* TARJETA DE CONTENIDO TV (SOPORTE PARA BOTONES NATIVOS SMART TV) */
+.tv-card,
+button.tv-card {
   flex: 0 0 250px;
+  width: 250px;
   background: var(--tv-bg-card);
   border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  text-align: left;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
 }
 
 .tv-card-poster-wrap {
