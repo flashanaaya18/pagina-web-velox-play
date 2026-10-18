@@ -1013,3 +1013,130 @@ body {
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+/* ===================================================================
+   LUFFY GOMU GOMU NO STRETCH ARMS (DESCARGAS BIEN ACOMODADAS)
+   =================================================================== */
+.luffy-gomu-banner {
+  text-align: center;
+  position: relative;
+  margin-bottom: 25px;
+  overflow: visible;
+}
+
+.luffy-speech-gomu {
+  display: inline-block;
+  background: rgba(11, 28, 54, 0.95);
+  border: 2px solid var(--op-gold);
+  border-radius: 20px;
+  padding: 12px 28px;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 183, 3, 0.4);
+  margin-bottom: 12px;
+  max-width: 680px;
+}
+
+.luffy-gomu-stretch-img-wrap {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  position: relative;
+  overflow: visible;
+}
+
+.luffy-stretch-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 183, 3, 0.35));
+  animation: gomuRubberElastic 4s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+@keyframes gomuRubberElastic {
+  0% {
+    transform: scaleX(0.96) scaleY(1.02) translateY(0px);
+  }
+  50% {
+    transform: scaleX(1.04) scaleY(0.98) translateY(-6px);
+  }
+  100% {
+    transform: scaleX(0.98) scaleY(1.01) translateY(4px);
+  }
+}
+
+/* Contenedores de Descargas Bien Acomodados */
+.downloads-grid-unified {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 35px;
+}
+
+@media (max-width: 991px) {
+  .downloads-grid-unified {
+    grid-template-columns: 1fr;
+  }
+  .luffy-speech-gomu {
+    font-size: 0.95rem;
+    padding: 10px 18px;
+  }
+}
+
+.download-master-card {
+  background: var(--op-card-bg);
+  border: 2px solid rgba(255, 183, 3, 0.25);
+  border-radius: 24px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  position: relative;
+}
+.download-master-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--op-gold);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 183, 3, 0.35);
+}
+
+.download-master-card.highlight-tv {
+  border-color: var(--op-gold);
+  background: radial-gradient(circle at 50% 0%, rgba(255, 183, 3, 0.2) 0%, rgba(11, 28, 54, 0.98) 75%);
+  box-shadow: 0 10px 35px rgba(255, 183, 3, 0.25);
+}
+
+.card-top-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--op-gold), #ff8800);
+  color: #0b1524;
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 4px 14px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.arch-item-row {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  transition: all 0.25s ease;
+}
+.arch-item-row:hover {
+  background: rgba(255, 183, 3, 0.1);
+  border-color: rgba(255, 183, 3, 0.4);
+}
+
