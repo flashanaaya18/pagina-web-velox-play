@@ -1,0 +1,940 @@
+/* ===================================================================
+   VELOX PLAY - EDICIÓN ESPECIAL ONE PIECE (RUMBO AL GRAND LINE)
+   Estilos Temáticos Piratas, Anime Shonen, Neón Dorado y Efectos Visuales
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Outfit:wght@300;400;500;600;700;800;900&family=Bangers&display=swap');
+
+:root {
+  /* Paleta Oficial One Piece / Grand Line */
+  --op-gold: #ffb703;
+  --op-gold-glow: #ffd166;
+  --op-red: #e63946;
+  --op-red-deep: #b7094c;
+  --op-blue-navy: #071326;
+  --op-blue-ocean: #0b1f3a;
+  --op-blue-azure: #0077b6;
+  --op-zoro-green: #00f5d4;
+  --op-zoro-aura: rgba(0, 245, 212, 0.45);
+  --op-sanji-fire: #ff7b00;
+  --op-gear5-white: #ffffff;
+  --op-gear5-purple: #9d4edd;
+  --op-gear5-glow: rgba(199, 125, 255, 0.6);
+  --op-card-bg: rgba(11, 28, 54, 0.85);
+  --op-card-border: rgba(255, 183, 3, 0.28);
+  --op-border-glow: rgba(255, 183, 3, 0.7);
+  --text-main: #f8f9fa;
+  --text-muted: #94a3b8;
+  --font-pirate: 'Pirata One', cursive, system-ui;
+  --font-anime: 'Bangers', cursive, system-ui;
+  --font-main: 'Outfit', sans-serif;
+}
+
+/* Reset Global & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--op-blue-navy);
+  color: var(--text-main);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(0, 119, 182, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 85% 30%, rgba(255, 183, 3, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(230, 57, 70, 0.12) 0%, transparent 50%),
+    linear-gradient(180deg, #050e1a 0%, #0b1e38 50%, #040912 100%);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar estilo Grand Line */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #050e1a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--op-gold), var(--op-red));
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--op-gold-glow);
+}
+
+/* Canvas de Berries (Monedas de Oro) y Partículas Haki */
+#onepiece-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Tipografía Pirata y Anime */
+.font-pirate {
+  font-family: var(--font-pirate);
+  letter-spacing: 1px;
+}
+.font-anime {
+  font-family: var(--font-anime);
+  letter-spacing: 1.5px;
+}
+
+.glow-gold {
+  color: var(--op-gold);
+  text-shadow: 0 0 12px rgba(255, 183, 3, 0.8), 0 0 25px rgba(255, 209, 102, 0.5);
+}
+.glow-red {
+  color: var(--op-red);
+  text-shadow: 0 0 12px rgba(230, 57, 70, 0.8), 0 0 25px rgba(230, 57, 70, 0.5);
+}
+.glow-zoro {
+  color: var(--op-zoro-green);
+  text-shadow: 0 0 12px var(--op-zoro-aura);
+}
+.glow-gear5 {
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px var(--op-gear5-purple);
+}
+
+/* Título de Alto Impacto Anime */
+.anime-hero-title {
+  font-family: var(--font-anime);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+  background: linear-gradient(180deg, #ffffff 20%, var(--op-gold) 70%, #d48b00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 30px rgba(255, 183, 3, 0.5));
+}
+
+/* ===================================================================
+   NAVBAR TEMÁTICA PIRATA (SOMBRERO DE PAJA)
+   =================================================================== */
+.navbar-onepiece {
+  background: rgba(7, 19, 38, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 2px solid rgba(255, 183, 3, 0.35);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 183, 3, 0.15);
+  transition: all 0.3s ease;
+  padding: 12px 0;
+  z-index: 1030;
+}
+
+.navbar-brand-custom {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.brand-logo-img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255, 183, 3, 0.7));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.navbar-brand-custom:hover .brand-logo-img {
+  transform: rotate(-8deg) scale(1.12);
+}
+
+.brand-text-main {
+  font-family: var(--font-anime);
+  font-size: 1.7rem;
+  letter-spacing: 1.5px;
+  background: linear-gradient(135deg, #fff 40%, var(--op-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  line-height: 1;
+}
+
+.brand-text-sub {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--op-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-link-custom {
+  color: #e2e8f0 !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 14px !important;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link-custom:hover {
+  color: var(--op-gold) !important;
+  background: rgba(255, 183, 3, 0.12);
+  transform: translateY(-2px);
+}
+
+.btn-nav-vip {
+  background: linear-gradient(135deg, var(--op-gold), #ff9100);
+  color: #0b1524 !important;
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 4px 18px rgba(255, 183, 3, 0.45);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-nav-vip:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 25px rgba(255, 183, 3, 0.7);
+  background: linear-gradient(135deg, #ffd166, #ffb703);
+}
+
+.btn-sound-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 183, 3, 0.3);
+  color: #cbd5e1;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-sound-toggle.active {
+  background: rgba(255, 183, 3, 0.2);
+  border-color: var(--op-gold);
+  color: var(--op-gold);
+}
+
+/* ===================================================================
+   PERSONAJES FLOTANTES INTERACTIVOS (LUFFY, CHOPPER, ZORO, SANJI)
+   =================================================================== */
+
+/* Widget flotante interactivo de Luffy en esquina inferior */
+.luffy-interactive-floating {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1050;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.luffy-interactive-floating:hover {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.luffy-speech-bubble {
+  background: rgba(11, 28, 54, 0.95);
+  border: 2px solid var(--op-gold);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 18px 18px 4px 18px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 183, 3, 0.4);
+  max-width: 250px;
+  margin-bottom: 8px;
+  text-align: right;
+  line-height: 1.35;
+  animation: luffyFloat 3s ease-in-out infinite;
+}
+
+.luffy-avatar-wrap {
+  position: relative;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 183, 3, 0.3) 0%, rgba(11, 28, 54, 0.8) 70%);
+  border: 3px solid var(--op-gold);
+  box-shadow: 0 0 25px rgba(255, 183, 3, 0.6), 0 8px 25px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.luffy-avatar-img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  position: absolute;
+  bottom: 2px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+  transition: all 0.3s ease;
+}
+
+/* Indicador de cambio de modo Gear 5 */
+.luffy-mode-badge {
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  background: var(--op-red);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  text-transform: uppercase;
+}
+
+@keyframes luffyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (max-width: 768px) {
+  .luffy-interactive-floating {
+    bottom: 16px;
+    right: 16px;
+  }
+  .luffy-speech-bubble {
+    font-size: 0.82rem;
+    max-width: 200px;
+  }
+  .luffy-avatar-wrap {
+    width: 78px;
+    height: 78px;
+  }
+  .luffy-avatar-img {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* Barco Thousand Sunny navegando decorativo en el fondo */
+.sunny-ship-anim {
+  animation: sunnySailing 12s ease-in-out infinite alternate;
+}
+@keyframes sunnySailing {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
+  100% { transform: translateY(4px) rotate(-1.5deg); }
+}
+
+/* ===================================================================
+   HERO SECTION (THOUSAND SUNNY & GRAND LINE)
+   =================================================================== */
+.hero-onepiece {
+  position: relative;
+  padding: 130px 0 90px 0;
+  overflow: hidden;
+}
+
+.hero-op-bg-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.28;
+  filter: saturate(1.2) contrast(1.1);
+  pointer-events: none;
+}
+
+.hero-op-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero-op-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(5, 14, 26, 0.7) 0%, rgba(7, 19, 38, 0.85) 60%, #071326 100%);
+}
+
+.hero-content-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge-pirate {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 183, 3, 0.15);
+  border: 1.5px solid var(--op-gold);
+  color: var(--op-gold);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 15px rgba(255, 183, 3, 0.3);
+}
+
+.hero-subtitle-op {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 26px;
+}
+
+/* Botones Hero Principales */
+.btn-hero-op-primary {
+  background: linear-gradient(135deg, var(--op-gold), #ff8800);
+  color: #08111e;
+  border: none;
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 14px 28px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(255, 183, 3, 0.5);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-hero-op-primary:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 12px 35px rgba(255, 183, 3, 0.75);
+  color: #000;
+}
+
+.btn-hero-op-tv {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 183, 3, 0.4);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 14px 24px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn-hero-op-tv:hover {
+  background: rgba(255, 183, 3, 0.18);
+  border-color: var(--op-gold);
+  color: var(--op-gold);
+  transform: translateY(-3px);
+}
+
+.btn-hero-op-vip {
+  background: linear-gradient(135deg, var(--op-red), #b7094c);
+  color: #fff;
+  border: none;
+  font-weight: 800;
+  font-size: 1.05rem;
+  padding: 14px 26px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 25px rgba(230, 57, 70, 0.45);
+  transition: all 0.3s ease;
+}
+.btn-hero-op-vip:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 30px rgba(230, 57, 70, 0.65);
+  color: #fff;
+}
+
+/* Showcase del Hero con Tripulación */
+.hero-crew-showcase {
+  position: relative;
+  border-radius: 24px;
+  overflow: visible;
+  padding: 20px;
+  background: radial-gradient(circle at center, rgba(11, 38, 77, 0.6) 0%, rgba(5, 15, 30, 0.9) 100%);
+  border: 2px solid rgba(255, 183, 3, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 183, 3, 0.2);
+}
+
+.crew-hero-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 18px;
+  transition: transform 0.5s ease;
+}
+.hero-crew-showcase:hover .crew-hero-img {
+  transform: scale(1.02);
+}
+
+/* Personaje recortado sobresaliendo en el showcase */
+.hero-luffy-overlayer {
+  position: absolute;
+  bottom: -20px;
+  right: -25px;
+  width: 220px;
+  pointer-events: none;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 183, 3, 0.4));
+  animation: luffyFloat 4s ease-in-out infinite;
+}
+
+/* Badges flotantes en Hero */
+.op-floating-badge {
+  position: absolute;
+  background: rgba(7, 19, 38, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid var(--op-gold);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  z-index: 5;
+}
+.op-badge-top-left {
+  top: 15px;
+  left: 15px;
+}
+.op-badge-bottom-left {
+  bottom: 25px;
+  left: 20px;
+}
+
+/* ===================================================================
+   TARJETAS DE CONTENIDO Y CATEGORÍAS GRAND LINE
+   =================================================================== */
+.content-section-op {
+  padding: 80px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.section-op-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-op-title {
+  font-family: var(--font-anime);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  color: #fff;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 20px rgba(255, 183, 3, 0.4);
+}
+
+.op-tabs-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.op-tab-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 183, 3, 0.25);
+  color: #cbd5e1;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 10px 22px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.op-tab-btn:hover {
+  background: rgba(255, 183, 3, 0.15);
+  border-color: var(--op-gold);
+  color: var(--op-gold);
+  transform: translateY(-2px);
+}
+.op-tab-btn.active {
+  background: linear-gradient(135deg, var(--op-gold), #ff8800);
+  border-color: var(--op-gold);
+  color: #0b1524;
+  box-shadow: 0 4px 20px rgba(255, 183, 3, 0.5);
+}
+
+/* Tarjeta de Streaming */
+.op-content-card {
+  background: var(--op-card-bg);
+  border: 1.5px solid var(--op-card-border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.op-content-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--op-gold);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 183, 3, 0.4);
+}
+
+.op-card-poster {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: #061120;
+}
+.op-card-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.op-content-card:hover .op-card-poster img {
+  transform: scale(1.08);
+}
+
+.op-card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(7, 19, 38, 0.85);
+  backdrop-filter: blur(6px);
+  color: var(--op-gold);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 183, 3, 0.4);
+}
+
+.op-card-badge-live {
+  background: var(--op-red);
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.7);
+}
+
+.op-card-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.op-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.op-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+/* ===================================================================
+   SECCIÓN DE PERSONAJES DESTACADOS (ZORO, SANJI, CHOPPER)
+   =================================================================== */
+.characters-showcase-section {
+  padding: 60px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.char-feature-card {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 183, 3, 0.12) 0%, rgba(7, 19, 38, 0.95) 75%);
+  border: 2px solid rgba(255, 183, 3, 0.35);
+  border-radius: 24px;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.char-feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 183, 3, 0.35);
+}
+
+.char-zoro-card {
+  border-color: rgba(0, 245, 212, 0.45);
+}
+.char-zoro-card:hover {
+  border-color: var(--op-zoro-green);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px var(--op-zoro-aura);
+}
+
+.char-sanji-card {
+  border-color: rgba(255, 123, 0, 0.45);
+}
+.char-sanji-card:hover {
+  border-color: var(--op-sanji-fire);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 123, 0, 0.5);
+}
+
+.char-img-wrap {
+  width: 170px;
+  height: 170px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.char-img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.7));
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.char-feature-card:hover .char-img-wrap img {
+  transform: scale(1.12) rotate(3deg);
+}
+
+.char-feature-name {
+  font-family: var(--font-anime);
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.char-feature-role {
+  color: var(--op-gold);
+  font-weight: 800;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.char-feature-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ===================================================================
+   WANTED POSTER VIP (RECOMPENSA DE PIRATA - 3,000,000,000 BERRIES)
+   =================================================================== */
+.wanted-vip-section {
+  padding: 80px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.wanted-poster-wrapper {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.wanted-poster-card {
+  position: relative;
+  max-width: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 183, 3, 0.35);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  border: 4px solid #8b5a2b;
+}
+.wanted-poster-card:hover {
+  transform: rotateY(-6deg) rotateX(4deg) scale(1.04);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 50px rgba(255, 183, 3, 0.6);
+}
+
+.wanted-poster-card img {
+  width: 100%;
+  display: block;
+}
+
+.wanted-poster-btn {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--op-gold), #ff8800);
+  color: #0b1524;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border-radius: 20px;
+  border: none;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+}
+.wanted-poster-card:hover .wanted-poster-btn {
+  transform: translateX(-50%) scale(1.08);
+  background: #fff;
+  color: #000;
+}
+
+/* Tarjetas de Precios VIP */
+.vip-pricing-box-op {
+  background: var(--op-card-bg);
+  border: 2px solid rgba(255, 183, 3, 0.35);
+  border-radius: 24px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.vip-pricing-box-op:hover {
+  border-color: var(--op-gold);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 183, 3, 0.3);
+}
+
+.vip-pricing-box-op.highlight-op {
+  border-color: var(--op-gold);
+  background: radial-gradient(circle at 50% 0%, rgba(255, 183, 3, 0.18) 0%, rgba(11, 28, 54, 0.95) 80%);
+  box-shadow: 0 10px 35px rgba(255, 183, 3, 0.25);
+}
+
+/* ===================================================================
+   CENTRO DE DESCARGAS APK CON CHOPPER
+   =================================================================== */
+.download-section-op {
+  padding: 80px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.chopper-helper-box {
+  background: radial-gradient(circle at 20% 50%, rgba(255, 183, 3, 0.15) 0%, rgba(11, 28, 54, 0.9) 80%);
+  border: 2px solid var(--op-gold);
+  border-radius: 24px;
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.6), 0 0 25px rgba(255, 183, 3, 0.25);
+  margin-bottom: 40px;
+}
+
+.chopper-helper-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  flex-shrink: 0;
+  animation: luffyFloat 3.5s ease-in-out infinite;
+}
+
+.apk-card-op {
+  background: var(--op-card-bg);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.apk-card-op:hover {
+  border-color: var(--op-gold);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 183, 3, 0.3);
+}
+
+.apk-card-op.featured-apk {
+  border-color: var(--op-gold);
+  background: radial-gradient(circle at 50% 0%, rgba(255, 183, 3, 0.15) 0%, rgba(11, 28, 54, 0.9) 85%);
+  box-shadow: 0 8px 25px rgba(255, 183, 3, 0.2);
+}
+
+.apk-icon-circle {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: rgba(255, 183, 3, 0.15);
+  border: 2px solid var(--op-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--op-gold);
+  margin: 0 auto 16px auto;
+}
+
+/* ===================================================================
+   FOOTER ESTILO GRAND LINE
+   =================================================================== */
+.footer-onepiece {
+  background: #040a14;
+  border-top: 2px solid rgba(255, 183, 3, 0.3);
+  padding: 60px 0 30px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-logo-op {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Efecto de Onda Haki al Hacer Clic */
+.haki-ripple {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  animation: hakiExpand 0.7s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  z-index: 9999;
+}
+@keyframes hakiExpand {
+  0% {
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--op-gold);
+    box-shadow: 0 0 15px var(--op-gold);
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    width: 320px;
+    height: 320px;
+    border: 1px solid rgba(255, 183, 3, 0);
+    box-shadow: 0 0 40px rgba(255, 84, 0, 0);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
