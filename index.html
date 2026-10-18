@@ -245,10 +245,29 @@
 
   <!-- HERO SECTION (THOUSAND SUNNY & GRAND LINE) -->
   <header id="inicio" class="hero-onepiece">
-    <!-- Fondo Ambiental Panorámico del Thousand Sunny -->
+    <!-- Fondo Ambiental Panorámico del Thousand Sunny Animado -->
     <div class="hero-op-bg-wrap">
-      <img src="assets/onepiece_hero.jpg" alt="Thousand Sunny Grand Line" class="hero-op-bg-img">
+      <picture>
+        <source srcset="assets/onepiece_ship_animated.webp" type="image/webp">
+        <img src="assets/onepiece_ship_animated.gif" alt="Thousand Sunny Navegando en el Grand Line Animado" class="hero-op-bg-img">
+      </picture>
       <div class="hero-op-gradient"></div>
+      <div class="hero-sunbeam-flare" aria-hidden="true"></div>
+      <!-- Olas del Océano Grand Line Animadas -->
+      <div class="ocean-waves-container" aria-hidden="true">
+        <svg class="ocean-wave wave-layer-1" viewBox="0 24 150 28" preserveAspectRatio="none">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <use href="#gentle-wave" x="48" y="0" fill="rgba(0, 119, 182, 0.45)" />
+        </svg>
+        <svg class="ocean-wave wave-layer-2" viewBox="0 24 150 28" preserveAspectRatio="none">
+          <use href="#gentle-wave" x="48" y="3" fill="rgba(7, 19, 38, 0.7)" />
+        </svg>
+        <svg class="ocean-wave wave-layer-3" viewBox="0 24 150 28" preserveAspectRatio="none">
+          <use href="#gentle-wave" x="48" y="5" fill="#071326" />
+        </svg>
+      </div>
     </div>
 
     <div class="container hero-content-wrap">
@@ -298,7 +317,10 @@
         <!-- Showcase con el Thousand Sunny y Luffy -->
         <div class="col-lg-5">
           <div class="hero-crew-showcase">
-            <img src="assets/onepiece_hero.jpg" alt="Velox Play Thousand Sunny" class="crew-hero-img">
+            <picture>
+              <source srcset="assets/onepiece_ship_animated.webp" type="image/webp">
+              <img src="assets/onepiece_ship_animated.gif" alt="Velox Play Thousand Sunny Animado" class="crew-hero-img">
+            </picture>
 
             <!-- Badges Flotantes -->
             <div class="op-floating-badge op-badge-top-left">
